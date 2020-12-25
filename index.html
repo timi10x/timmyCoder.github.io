@@ -1,12 +1,498 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>fritz2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="small library to make web ui development in pure Kotlin easy" />
+	<meta name="keywords" content="kotlin ui web development coroutines" />
+	<meta name="author" content="jwstegemann" />
 
-<head>
-    <title>timmy coder</title>
-</head>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-<body>
-    <p>This site is under heavy construction</p>
-</body>
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="fritz2" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Kotlin Playground -->
+	<script src="https://unpkg.com/kotlin-playground@1"></script>
+
+	<!-- Github Buttons -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+	</head>
+	<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-2">
+							<div class="fritz2-logo"><a href="index.html"><img class="logo-svg" src="images/fritz2_logo_small_white.svg"/>&nbsp;fritz2</a></div>
+						</div>
+						<div class="col-md-10 text-right menu-1">
+							<ul>
+								<li class="active"><a href="index.html">Home</a></li>
+								<li><a href="https://components.fritz2.dev">Components</a></li>
+								<li><a href="https://docs.fritz2.dev">Documentation</a></li>
+								<li><a href="./examples.html">Examples</a></li>
+								<li><a href="https://api.fritz2.dev">API</a></li>
+								<li><a href="https://github.com/jwstegemann/fritz2">Github</a></li>
+								<li style="text-transform: none; letter-spacing: normal; vertical-align: top">
+									<a class="github-button" href="https://github.com/jwstegemann/fritz2" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star jwstegemann/fritz2 on GitHub">Star</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<section id="home" class="video-hero" style="height: 700px; background-image: url(images/background.png);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+		<div class="overlay"></div>
+			<a class="player" data-property="{videoURL:'https://youtu.be/lRTtMcx6rSM',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default'}"></a>
+			<div class="display-t text-center">
+				<div class="display-tc">
+					<div class="container">
+						<div class="col-md-12 col-md-offset-0">
+							<div class="animate-box">
+								<h2><img class="logo-svg" src="images/fritz2_logo_small_white.svg"/>&nbsp;fritz2</h2>
+								<p>easily building reactive web-apps in pure Kotlin</p>
+								<p><a href="./examples.html" class="btn btn-primary btn-lg btn-custom" style="font-weight: bold"><i class="on-btn icon-eye2"></i>&nbsp;&nbsp;show me some code!</a>
+									<a href="https://youtu.be/c-ybTQdF5xk" class="btn btn-primary btn-lg btn-custom" style="font-weight: bold"><i class="on-btn icon-play2"></i>&nbsp;&nbsp;create a new project</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- hero -->
+
+		<div class="colorlib-featured">
+			<div class="row animate-box">
+				<div class="featured-wrap">
+							<div class="col-md-8 col-md-offset-2">
+								<div class="featured-entry hero-example">
+									<code class="code-blocks-selector"
+										  data-highlight-only="nocursor"
+										  theme="idea"
+										  auto-indent="true"
+										  mode="kotlin"
+										  lines="true"
+										  style="width: 100%;">
+										fun main() {
+
+										val store = object : RootStore<String>("", id = "model") {
+										val addADot = handle { model ->
+										"$model."
+										}
+										}
+
+										render {
+										div {
+										div("form-group") {
+										label(`for` = store.id) {
+										text("Input")
+										}
+										input("form-control", id = store.id) {
+										placeholder = const("Add some input")
+										value = store.data
+
+										changes.values() handledBy store.update
+										}
+										}
+										div("form-group") {
+										label {
+										text("Value")
+										}
+										div("form-control") {
+										store.data.bind()
+										attr("readonly", "true")
+										}
+										}
+										div("form-group") {
+										button("btn btn-primary") {
+										text("Add a dot")
+										clicks handledBy store.addADot
+										}
+										}
+										}
+										}.mount("target")
+										}
+									</code>
+								</div>
+							</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- features -->
+
+		<div class="colorlib-work-featured colorlib-bg-white">
+			<div class="container">
+				<div class="row mobile-wrap">
+					<div class="col-md-5 animate-box">
+						<div class="mobile-img info-img" style="background-image: url(images/fritz_info_2.jpg);"></div>
+					</div>
+					<div class="col-md-7 animate-box">
+						<div class="desc">
+							<h2>Lightweight, reactive, easy to learn</h2>
+							<div class="features">
+								<span class="icon"><i class="icon-home"></i></span>
+								<div class="f-desc">
+									<p>fritz2 heavily uses Kotlin standard features (especially flows) and has no external dependencies. It's core source is just about 1,5k lines of code so it is one of the most lightweight ui-libs (we know...).</p>
+								</div>
+							</div>
+							<div class="features">
+								<span class="icon"><i class="icon-power-cord"></i></span>
+								<div class="f-desc">
+									<p>fritz2 offers precise data-binding for your ui-elements. When your data changes, those - and only those - DOM-elements are updated, that are bound to parts of the model, that really have changed - no virtual dom needed.</p>
+								</div>
+							</div>
+							<div class="features">
+								<span class="icon"><i class="icon-library"></i></span>
+								<div class="f-desc">
+									<p>fritz2 is built around just a few basic concepts (Stores, Handlers, Tags, etc.). You can easily learn how to use them from our documentation or the <a href="./examples.html">examples</a> we provide. Enjoy! </p>
+								</div>
+							</div>
+							<!-- <p><a href="#" class="btn btn-primary btn-outline with-arrow">Start collaborating <i class="icon-arrow-right3"></i></a></p> -->
+						</div>
+					</div>
+				</div>
+				<div class="row mobile-wrap">
+					<div class="col-md-5 col-md-push-7 animate-box">
+						<div class="mobile-img info-img" style="background-image: url(images/fritz_info_1.jpg);"></div>
+					</div>
+					<div class="col-md-7 col-md-pull-5 animate-box">
+						<div class="desc">
+							<h2>Flexible, effective, ready to go</h2>
+							<div class="features">
+								<span class="icon"><i class="icon-cog"></i></span>
+								<div class="f-desc">
+									<p>fritz2 allows you to build small apps very fast with a few lines of code as well as enterprise scale applications with a focus on reusable components, clean code and structure. The functional reactive concept makes the <a href="./examples.html">resulting code</a> easy to read und to maintain.</p>
+								</div>
+							</div>
+							<div class="features">
+								<span class="icon"><i class="icon-rocket"></i></span>
+								<div class="f-desc">
+									<p>fritz2 includes everything you need to start your project: state management (even for complex nested models), validation, routing, REST, WebSockets, WebComponents as well as a set of tailor-made <a href="https://components.fritz2.dev">components</a>.</p>
+								</div>
+							</div>
+							<div class="features">
+								<span class="icon"><i class="icon-tree"></i></span>
+								<div class="f-desc">
+									<p>Utilizing Koltin's multiplatform-abilities, you have to write your data classes and validation code (!) just once and use it in your client and server. Use a tool-chain (Gradle, IDEA, etc.) you know well to jump right in and build your apps.</p>
+								</div>
+							</div>
+							<!-- <p><a href="#" class="btn btn-primary btn-outline with-arrow">Start collaborating <i class="icon-arrow-right3"></i></a></p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- numbers -->
+
+		<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(images/cover_img_1.jpg);" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-4 col-sm-4 text-center animate-box">
+							<div class="counter-entry">
+								<span class="icon"><i class="flaticon-ribbon"></i></span>
+								<div class="desc">
+									<span class="colorlib-counter js-counter" data-from="0" data-to="100" data-speed="2000" data-refresh-interval="50"></span>
+									<span class="colorlib-counter-label">percent pure Kotlin</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 text-center animate-box">
+							<div class="counter-entry">
+								<span class="icon"><i class="flaticon-church"></i></span>
+								<div class="desc">
+									<span class="colorlib-counter js-counter" data-from="0" data-to="0" data-speed="1" data-refresh-interval="0"></span>
+									<span class="colorlib-counter-label">external dependencies</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 text-center animate-box">
+							<div class="counter-entry">
+								<span class="icon"><i class="flaticon-dove"></i></span>
+								<div class="desc">
+									<span class="colorlib-counter js-counter" data-from="0" data-to="1500" data-speed="3000" data-refresh-interval="50"></span>
+									<span class="colorlib-counter-label">lines of code in the core</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- news -->
+
+		<div class="colorlib-blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+						<h2>News</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>Version 0.8 released</h2>
+							<p class="admin"><span>December 03, 2020</span></p>
+							<p>We released a new version of fritz2 including</p>
+							<ul>
+								<li>WebSocket-support</li>
+								<li>improved performance and memory</li>
+								<li>in-code styling</li>
+								<li><a href="https://components.fritz2.dev">components (preview)</a></li>
+							</ul>
+							<p>Here is the release on <a href="https://github.com/jwstegemann/fritz2/releases" target="_blank">github</a></p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jwstegemann_8bit.png);"></a> <a href="https://github.com/jwstegemann" class="author">by jwstegemann</a></p>
+						</article>
+					</div>
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>Version 0.7.1 released</h2>
+							<p class="admin"><span>October 15, 2020</span></p>
+							<p>We released a patch for fritz2 to work with Kotlin 1.4.0</p>
+							<p>Here is the release on <a href="https://github.com/jwstegemann/fritz2/releases" target="_blank">github</a></p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jwstegemann_8bit.png);"></a> <a href="https://github.com/jwstegemann" class="author">by jwstegemann</a></p>
+						</article>
+					</div>
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>New full-stack examples</h2>
+							<p class="admin"><span>August 17, 2020</span></p>
+							<p>We have created two new full-stack examples which use fritz2</p>
+							<ul>
+								<li><a href="https://github.com/jamowei/fritz2-ktor-todomvc">fritz2-ktor-todomvc</a></li>
+								<li><a href="https://github.com/jamowei/fritz2-spring-todomvc">fritz2-spring-todomvc</a></li>
+							</ul>
+							<p>Both projects provide a RESTful API in backend and use fritz2 for the frontend.</p>
+							<p>Check out the projects and start playing around with it.</p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jamowei_8bit.png);"></a> <a href="https://github.com/jamowei" class="author">by jamowei</a></p>
+						</article>
+					</div>
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>Version 0.7 released</h2>
+							<p class="admin"><span>August 13, 2020</span></p>
+							<p>We released a new version of fritz2 including</p>
+							<ul>
+								<li>backend repositories (started with REST and LocalStorage)</li>
+								<li>history for stores (undo)</li>
+								<li>tracking of stores (spinner)</li>
+								<li>suspendable handlers</li>
+								<li>better error handling in stores</li>
+								<li>some reworks (e.g., validation)</li>
+								<li>bug fixes</li>
+							</ul>
+							<p>Please have a look at the <a href="https://github.com/jwstegemann/fritz2/releases" target="_blank">release notes</a></p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jwstegemann_8bit.png);"></a> <a href="https://github.com/jwstegemann" class="author">by jwstegemann</a></p>
+						</article>
+					</div>
+
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>Version 0.6 released</h2>
+							<p class="admin"><span>July 13, 2020</span></p>
+							<p>We released a new version of fritz2 including</p>
+							<ul>
+								<li>non intrusive models (no more inheritance)</li>
+								<li>actively dispatch actions (to init your Store i.e.)</li>
+								<li>comments in your HTML</li>
+								<li>some bug fixes</li>
+							</ul>
+							<p>Please have a look at the <a href="https://github.com/jwstegemann/fritz2/releases" target="_blank">release notes</a></p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jwstegemann_8bit.png);"></a> <a href="https://github.com/jwstegemann" class="author">by jwstegemann</a></p>
+						</article>
+					</div>
+
+					<!--<div class="col-md-4 animate-box">
+						<article>
+							<h2>Version 0.5 released</h2>
+							<p class="admin"><span>June 11, 2020</span></p>
+							<p>We released a new version of fritz2 including</p>
+							<ul>
+								<li>moved packages and artifacts to dev.fritz2</li>
+								<li>changed default project type to multiplatform</li>
+							</ul>
+							<p>Please have a look at the <a href="https://github.com/jwstegemann/fritz2/releases" target="_blank">release notes</a></p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jwstegemann_8bit.png);"></a> <a href="https://github.com/jwstegemann" class="author">by jwstegemann</a></p>
+						</article>
+					</div>-->
+					<div class="col-md-4 animate-box">
+						<article>
+							<h2>VKUG TALK on Youtube</h2>
+							<p class="admin"><span>May 28, 2020</span></p>
+							<p><a href="https://slides.com/jwstegemann/fritz2/fullscreen" target="_blank">Here</a>
+								is our talk at the VKUG presented by jwstegemann.
+								It's a good way to get an overview what fritz2 can do for you.</p>
+							<p>You can find the hole presentation on <a href="https://youtu.be/s_C3uhThzgk" target="_blank">Youtube</a>.</p>
+							<p class="author-wrap"><a href="#" class="author-img" style="background-image: url(images/profile_jamowei_8bit.png);"></a> <a href="https://github.com/jamowei" class="author">by jamowei</a></p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- footer -->
+
+		<footer id="colorlib-footer">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col-md-3 colorlib-widget">
+						<h4>About fritz2</h4>
+						<p>fritz2 is a small lib to easily build reactive web apps in pure Kotlin.</p>
+						<p>
+							<ul class="colorlib-social-icons">
+								<!-- <li><a href="#"><i class="icon-twitter"></i></a></li>
+								<li><a href="#"><i class="icon-facebook"></i></a></li>
+								<li><a href="#"><i class="icon-linkedin"></i></a></li>
+								<li><a href="#"><i class="icon-dribbble"></i></a></li>
+								-->
+							</ul>
+						</p>
+					</div>
+					<div class="col-md-3 colorlib-widget">
+						<h4>Information</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="https://github.com/jwstegemann/fritz2"><i class="icon-check"></i> project on GitHub</a></li>
+								<li><a href="https://components.fritz2.dev"><i class="icon-check"></i> components</a></li>
+								<li><a href="./examples.html"><i class="icon-check"></i> hosted examples</a></li>
+								<li><a href="https://docs.fritz2.dev"><i class="icon-check"></i> documentation</a></li>
+								<li><a href="https://github.com/jwstegemann/fritz2-template"><i class="icon-check"></i> project template</a></li>
+								<li><a href="https://api.fritz2.dev"><i class="icon-check"></i> API documentation</a></li>
+							</ul>
+						</p>
+					</div>
+
+					<div class="col-md-3 colorlib-widget">
+						<h4>Join us</h4>
+						<div class="f-blog">
+							<a href="https://fritz2workspace.slack.com/" target="_blank" class="blog-img" style="background-position: bottom; background-size: cover; background-image: url(images/Slack_Mark_Monochrome_White.svg);">
+							</a>
+							<div class="desc">
+								<h2><a href="https://fritz2workspace.slack.com/" target="_blank" >Talk to us on slack</a></h2>
+								<p class="admin"><span>(send us a mail to get invited)</span></p>
+							</div>
+						</div>
+						<div class="f-blog">
+							<a href="https://discord.gg/pRPXJkk" target="_blank" class="blog-img" style="background-size: contain; background-image: url(images/Discord-Logo-White.svg);">
+							</a>
+							<div class="desc">
+								<h2><a href="https://discord.gg/pRPXJkk" target="_blank" >Chat about fritz2 on Discord</a></h2>
+								<p class="admin"><span>(just follow the link)</span></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 colorlib-widget">
+						<h4>made by</h4>
+						<ul class="colorlib-footer-links">
+							<li><a href="https://github.com/jwstegemann"><i class="icon-profile-male"></i> jwstegemann</a></li>
+							<li><a href="https://github.com/jamowei"><i class="icon-profile-male"></i> jamowei</a></li>
+							<li><a href="mailto:info@fritz2.dev"><i class="icon-envelope"></i> info@fritz2.dev</a></li>
+<!--							<li><a href="#"><i class="icon-location4"></i> yourwebsite.com</a></li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<p>
+								 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> This is based on the great <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --><br>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- YTPlayer -->
+	<script src="js/jquery.mb.YTPlayer.min.js"></script>
+	<!-- Owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Counters -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	<!-- Kotlin Playground -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			KotlinPlayground('.code-blocks-selector');
+		});
+	</script>
+
+	</body>
 </html>
+

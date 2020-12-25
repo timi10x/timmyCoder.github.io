@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="fritz_logo_grey_youtube.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 2560.0001 1440"
+   height="1440mm"
+   width="2560mm"
+   inkscape:export-filename="C:\Users\Gamer\IdeaProjects\fritz2-web\images\fritz_logo_grey_youtube.png"
+   inkscape:export-xdpi="25.41"
+   inkscape:export-ydpi="25.41">
+  <defs
+     id="defs2">
+    <rect
+       id="rect2956"
+       height="84.438293"
+       width="1287.4112"
+       y="895.92554"
+       x="278.10071" />
+    <rect
+       id="rect2950"
+       height="174.41593"
+       width="365.93146"
+       y="1012.2028"
+       x="743.20986" />
+    <linearGradient
+       id="linearGradient2920"
+       inkscape:collect="always">
+      <stop
+         id="stop2916"
+         offset="0"
+         style="stop-color:#333333;stop-opacity:1;" />
+      <stop
+         id="stop2918"
+         offset="1"
+         style="stop-color:#333333;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       osb:paint="solid"
+       id="linearGradient2876">
+      <stop
+         id="stop2874"
+         offset="0"
+         style="stop-color:#333333;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="1210.7717"
+       x2="-213.46165"
+       y1="1359.5383"
+       x1="-213.46165"
+       id="linearGradient2926"
+       xlink:href="#linearGradient2920"
+       inkscape:collect="always" />
+    <filter
+       height="1.0036509"
+       y="-0.0018254689"
+       width="1.0004246"
+       x="-0.00021231334"
+       id="filter2928"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2930"
+         stdDeviation="0.22630724"
+         inkscape:collect="always" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2920"
+       id="linearGradient2926-8"
+       x1="-213.46165"
+       y1="1359.5383"
+       x2="-213.46165"
+       y2="1210.7717"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2928-9"
+       x="-0.00021231335"
+       width="1.0004246"
+       y="-0.0018254688"
+       height="1.0036509">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.22630724"
+         id="feGaussianBlur2930-7" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     inkscape:pagecheckerboard="false"
+     fit-margin-bottom="0"
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-8"
+     inkscape:window-x="-8"
+     inkscape:window-height="1017"
+     inkscape:window-width="1920"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="2110.7923"
+     inkscape:cx="2799.1237"
+     inkscape:zoom="0.077365354"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(214.36779,-68.30486)"
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Ebene 2" />
+  <g
+     transform="translate(214.36779,-68.30486)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Ebene 1">
+    <text
+       id="text62"
+       y="150.32117"
+       x="-76.8731"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:Baskerville;-inkscape-font-specification:Baskerville;stroke-width:0.264583"
+         y="150.32117"
+         x="-76.8731"
+         id="tspan60"
+         sodipodi:role="line" /></text>
+    <g
+       transform="translate(-88.247041,92.706709)"
+       id="g90">
+      <path
+         d="M 560.17921,523.15428 A 169.4353,165.60385 0 0 0 390.95808,688.75893 169.4353,165.60385 0 0 0 560.39424,854.36238 169.4353,165.60385 0 0 0 729.82925,688.75893 169.4353,165.60385 0 0 0 560.39424,523.15428 a 169.4353,165.60385 0 0 0 -0.215,0 z m 79.47948,41.23005 c 7.88882,0.0408 14.258,6.44287 14.21738,14.29018 l -0.29364,56.86488 c -0.0404,7.84734 -6.47653,14.18203 -14.36536,14.14109 -7.88883,-0.0408 -14.25811,-6.44172 -14.21738,-14.28907 l -28.58275,-0.1479 c -7.88886,-0.0408 -14.32463,6.2949 -14.36535,14.14224 l -0.0718,13.92025 h 13.19184 a 14.230797,14.521689 0 0 1 0.99896,-0.0361 14.230797,14.521689 0 0 1 14.23123,14.52145 14.230797,14.521689 0 0 1 -14.23123,14.52145 14.230797,14.521689 0 0 1 -1.15617,-0.0487 h -83.57463 v -0.0472 a 14.230797,14.482708 0 0 1 -0.67523,0.018 14.230797,14.482708 0 0 1 -14.23124,-14.48332 14.230797,14.482708 0 0 1 14.23124,-14.48213 14.230797,14.482708 0 0 1 1.01627,0.0372 H 524.812 l 0.1479,-28.43246 c 0.16269,-31.40383 25.8904,-56.73234 57.46032,-56.56889 l 42.87411,0.22185 c 0.0408,-7.84734 6.47538,-14.18308 14.3642,-14.14224 z m -115.06746,135.2414 57.16664,0.29581 -0.22077,42.64868 c -0.16269,31.40329 -25.8904,56.7322 -57.46032,56.5689 l -28.58274,-0.14791 c -0.0408,7.84731 -6.47657,14.18315 -14.36536,14.14221 -7.88886,-0.0408 -14.25811,-6.44288 -14.21738,-14.29022 l 0.29472,-56.86488 c 0.0408,-7.8473 6.47538,-14.18315 14.36421,-14.1422 7.88879,0.0408 14.25926,6.44284 14.21853,14.29021 l 14.29138,0.074 c 7.88882,0.0408 14.32347,-6.2949 14.3642,-14.14224 z"
+         style="fill:#333333;stroke-width:0.591955"
+         id="path30"
+         inkscape:connector-curvature="0" />
+      <text
+         id="text28"
+         y="848.56042"
+         x="762.73016"
+         style="font-style:normal;font-weight:normal;font-size:418.46px;line-height:1.25;font-family:sans-serif;fill:#333333;fill-opacity:1;stroke:none;stroke-width:10.4615"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#333333;stroke-width:10.4615"
+           y="848.56042"
+           x="762.73016"
+           id="tspan26"
+           sodipodi:role="line">fritz2</tspan></text>
+    </g>
+    <rect
+       transform="matrix(1,0,0,0.55275165,0,674.58684)"
+       style="opacity:1;mix-blend-mode:normal;fill:url(#linearGradient2926);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.257;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter2928)"
+       id="rect92-3"
+       width="2558.1877"
+       height="297.53308"
+       x="-213.46165"
+       y="1210.7717" />
+    <text
+       transform="matrix(1.2441921,0,0,1.2441921,-31.817972,-86.354763)"
+       style="font-style:normal;font-weight:normal;font-size:50.8px;line-height:1.65;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2956);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text2954"
+       xml:space="preserve"><tspan
+         x="278.10156"
+         y="952.43216"><tspan
+           style="shape-inside:url(#rect2956)">easily building reactive web-apps in pure Kotlin</tspan></tspan></text>
+    <rect
+       y="1210.7717"
+       x="-213.46165"
+       height="297.53308"
+       width="2558.1877"
+       id="rect92-3-2"
+       style="opacity:1;mix-blend-mode:normal;fill:url(#linearGradient2926-8);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.257;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter2928-9)"
+       transform="matrix(-1,0,0,-0.55275165,2131.2644,902.32305)" />
+  </g>
+</svg>
