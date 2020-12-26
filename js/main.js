@@ -3,12 +3,12 @@ var viewportHeight = window.innerHeight
 var viewportWidth = window.innerWidth
 
 var colorArray = [
+    '#DBE2EF',
+    '#53354A',
+    '#FFEA85',
     '#D53939',
     '#90D26D',
-    '#FFEA85',
-    '#DBE2EF',
     '#2A363B',
-    '#53354A',
 ]
 
 function setBannerViewPort() {
