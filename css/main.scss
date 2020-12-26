@@ -450,7 +450,7 @@ header {
 }
 
 .column {
-padding: 0 2rem;
+    padding: 0 2rem;
 }
 
 .row {
@@ -463,6 +463,26 @@ padding: 0 2rem;
 
 
 /* end of flip card scss */
+
+.event-card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+
+/* On mouse-over, add a deeper shadow */
+
+.event-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+/* Add some padding inside the card container */
+
+.event-container {
+    padding: 2px 16px;
+}
 
 footer {
     height: 300px;
