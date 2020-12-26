@@ -333,6 +333,7 @@ header img {
 }
 
 .na-senjathu .row {
+    display: block;
     margin: 70px 0 0
 }
 
@@ -528,6 +529,7 @@ footer {
 .flip-card-front {
     background-color: #bbb;
     color: black;
+    box-shadow: 0 0 4px 4px whitesmoke;
 }
 
 
@@ -537,32 +539,22 @@ footer {
     background-color: dodgerblue;
     color: white;
     transform: rotateY(180deg);
+    box-shadow: 0 0 35px 30px #0000000d;
 }
 
 .column {
-    float: left;
-    width: 22%;
-    padding: 0 80px;
-}
-
-.row {
-    margin: 0 -150px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-@media screen and (max-width: 400px) {
-    .column {
-        width: 100%;
-        display: block;
-        margin-bottom: 20px;
+    padding: 0 2rem;
     }
-}
+    
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 0 4rem;
+    }
 
+    
 
 /* end of flip card css */
 
