@@ -31,6 +31,12 @@ h1 {
     font-family: monospace;
 }
 
+h3 {
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(99, 86, 229, 0.8);
+}
+
 h4 {
     font-family: monospace;
     font-size: 10px;
@@ -381,6 +387,8 @@ header {
     perspective: 1000px;
     border-radius: 5px;
     padding: 16px;
+    border: 5px;
+    border-color: #747474;
     /* Remove this if you don't want the 3D effect */
 }
 
@@ -506,20 +514,20 @@ footer {
 }
 
 .enaku-therunjathu {
-    #ux {
+    #kotlin {
+        width: 98%;
+    }
+    #material-design {
+        width: 90%;
+    }
+    #jetpack {
+        width: 80%;
+    }
+    #ktor {
         width: 60%;
     }
-    #ui {
-        width: 90%;
-    }
-    #html {
-        width: 93%;
-    }
-    #js {
-        width: 90%;
-    }
-    #react {
-        width: 98%;
+    #android {
+        width: 80%;
     }
     .enaku-therunjathu-block {
         h4 {
@@ -532,7 +540,7 @@ footer {
     }
     .percentage-container {
         margin-top: 20px;
-        width: 80%;
+        width: 85%;
         height: 7px;
         margin-left: 10px;
         margin-right: 90px;

@@ -30,9 +30,20 @@ h1 {
     font-family: monospace;
 }
 
+h3 {
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(99, 86, 229, 0.8);
+}
+
+h5 {
+    font-family: monospace;
+    font-size: 14px;
+}
+
 h4 {
     font-family: monospace;
-    font-size: 10px;
+    font-size: 16px;
 }
 
 p {
@@ -608,24 +619,24 @@ footer #git {
     color: #CCC !important
 }
 
-.enaku-therunjathu #ux {
-    width: 60%
+.enaku-therunjathu #kotlin {
+    width: 98%;
 }
 
-.enaku-therunjathu #ui {
-    width: 90%
+.enaku-therunjathu #jetpack {
+    width: 80%;
 }
 
-.enaku-therunjathu #html {
-    width: 93%
+.enaku-therunjathu #ktor {
+    width: 60%;
 }
 
-.enaku-therunjathu #js {
-    width: 90%
+.enaku-therunjathu #android {
+    width: 80%;
 }
 
-.enaku-therunjathu #react {
-    width: 98%
+.enaku-therunjathu #material-design {
+    width: 90%;
 }
 
 .enaku-therunjathu .enaku-therunjathu-block {
@@ -642,7 +653,7 @@ footer #git {
 
 .enaku-therunjathu .percentage-container {
     margin-top: 20px;
-    width: 80%;
+    width: 85%;
     margin-left: 10px;
     margin-right: 90px;
     height: 7px;
