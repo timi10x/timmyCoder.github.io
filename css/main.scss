@@ -27,6 +27,23 @@ h2 {
     position: relative;
 }
 
+h1 {
+    font-family: monospace;
+}
+
+h4 {
+    font-family: monospace;
+    font-size: 10px;
+}
+
+p {
+    font-family: monospace;
+}
+
+.inayam {
+    font-family: monospace;
+}
+
 a {
     color: #BDBDBD;
     &:hover,
@@ -432,7 +449,7 @@ header {
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
     .column {
         width: 100%;
         display: block;

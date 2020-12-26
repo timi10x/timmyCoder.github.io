@@ -20,10 +20,27 @@ body.windows::-webkit-scrollbar-thumb {
 
 h2 {
     font-size: 50px;
-    font-family: 'Nunito', sans-serif;
+    font-family: monospace;
     font-weight: 600;
     margin: 0;
     position: relative
+}
+
+h1 {
+    font-family: monospace;
+}
+
+h4 {
+    font-family: monospace;
+    font-size: 10px;
+}
+
+p {
+    font-family: monospace;
+}
+
+.inayam {
+    font-family: monospace;
 }
 
 a {
@@ -527,7 +544,7 @@ footer {
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
     .column {
         width: 100%;
         display: block;
