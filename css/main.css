@@ -73,6 +73,11 @@ a.fancy {
     color: #6356E5
 }
 
+#skills .fancy {
+    color: white;
+    text-decoration: underline;
+}
+
 #sp {
     color: #2ebd59
 }
