@@ -70,3 +70,26 @@ $(window).on('load', function() {
         $('body').addClass('windows')
     }
 })
+var customNav = document.getElementById("custom-nav");
+var customNavLink = document.getElementsByClassName("fancy");
+var imageNav = document.getElementById("image-nav");
+let content = document.getElementById('custom-nav');
+let firstChild = content.firstChild.nodeName;
+imageNav.addEventListener("mouseleave", function(event) {
+    customNav.style.display = "none";
+    // for (var i = 0; i < customNodes.length; i++) {
+    //     customNodes[i].style.display = "none";
+
+    // }
+    for (var i = 0; i < customNavLink.length; i++) {
+        // customNavLink[i].style.display = "none";
+        customNavLink[i].style.color = "red";
+
+    }
+    firstChild.display = "none";
+
+
+});
+imageNav.addEventListener("mouseover", function(event) {
+    customNav.style.display = "grid";
+});

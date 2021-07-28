@@ -275,8 +275,8 @@ header img {
     margin-left: 120px
 }
 
-.my-nav:hover {
-    width: 600px
+.my-nav a:last-child {
+    margin-right: 200px;
 }
 
 .enna-pathi {

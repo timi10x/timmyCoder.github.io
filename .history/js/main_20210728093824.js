@@ -70,3 +70,34 @@ $(window).on('load', function() {
         $('body').addClass('windows')
     }
 })
+var customNav = document.getElementById("custom-nav");
+var customNavLink = document.getElementsByClassName("custom-nav-link");
+var imageNav = document.getElementById("image-nav");
+imageNav.addEventListener("mouseleave", function(event) {
+    customNav.style.display = "none";
+    // for (var i = 0; i < customNodes.length; i++) {
+    //     customNodes[i].style.display = "none";
+
+    // }
+    // for (var i = 0; i < customNavLink.length; i++) {
+    //     // customNavLink[i].style.display = "none";
+    //     // customNavLink[i].style.color = "red";
+    //     console.log(customNavLink[i]);
+
+    // }
+
+
+});
+imageNav.addEventListener("mouseover", function(event) {
+    customNav.style.display = "grid";
+    // for (var i = 0; i < customNavLink.length; i++) {
+    //     customNavLink[i].style.display = "block";
+    //     // customNavLink[i].style.color = "red";
+
+    // }
+});
+for (var i = 0; i < customNavLink.length; i++) {
+    // customNavLink[i].style.display = "block";
+    customNavLink[i].style.color = "white";
+
+}

@@ -70,3 +70,15 @@ $(window).on('load', function() {
         $('body').addClass('windows')
     }
 })
+var customNav = document.getElementById("custom-nav");
+var imageNav = document.getElementById("image-nav");
+imageNav.addEventListener("mouseleave", function(event) {
+    customNav.style.display = "none";
+    for (var i = 0; i < customNav.length; i++) {
+        customNav[i].style.display = "none";
+    }
+
+});
+imageNav.addEventListener("mouseover", function(event) {
+    customNav.style.display = "grid";
+});

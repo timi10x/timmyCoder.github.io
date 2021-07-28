@@ -279,6 +279,10 @@ header img {
     width: 600px
 }
 
+.my-nav a:last-child {
+    margin-right: 200px;
+}
+
 .enna-pathi {
     margin-top: 70px;
     font-size: 18px;

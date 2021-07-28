@@ -70,3 +70,18 @@ $(window).on('load', function() {
         $('body').addClass('windows')
     }
 })
+var customNav = document.getElementById("custom-nav");
+var customNodes = document.querySelector(".custom-nav").children;
+var imageNav = document.getElementById("image-nav");
+imageNav.addEventListener("mouseleave", function(event) {
+    customNav.style.display = "none";
+    // for (var i = 0; i < customNodes.length; i++) {
+    //     customNodes[i].style.display = "none";
+
+    // }
+    customNodes.style.display = "none";
+
+});
+imageNav.addEventListener("mouseover", function(event) {
+    customNav.style.display = "grid";
+});

@@ -70,3 +70,8 @@ $(window).on('load', function() {
         $('body').addClass('windows')
     }
 })
+var customNav = document.getElementById("custom-nav");
+var imageNav = document.getElementById("image-nav");
+imageNav.addEventListener("mouseover", function(event) {
+    customNav.style.display = "none";
+}, false);
