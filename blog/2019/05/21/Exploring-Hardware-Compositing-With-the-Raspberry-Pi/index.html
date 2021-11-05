@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="IntroductionHardware compositing is something I took for granted until earlier this year. The mental model I previously had was a single framebuffer sitting at the end of the display pipeline getting">
+    <meta name="keywords" content="Raspberry Pi">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Exploring Hardware Compositing With the Raspberry Pi">
+    <meta property="og:url" content="http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/index.html">
+    <meta property="og:site_name" content="Benjamin Doherty&#39;s Blog">
+    <meta property="og:description" content="IntroductionHardware compositing is something I took for granted until earlier this year. The mental model I previously had was a single framebuffer sitting at the end of the display pipeline getting">
+    <meta property="og:locale" content="default">
+    <meta property="og:image" content="http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/display-pipeline.svg">
+    <meta property="og:image" content="http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/first_plane.png">
+    <meta property="og:image" content="http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/uninitialized_fb.jpeg">
+    <meta property="og:updated_time" content="2019-05-22T04:58:25.833Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Exploring Hardware Compositing With the Raspberry Pi">
+    <meta name="twitter:description" content="IntroductionHardware compositing is something I took for granted until earlier this year. The mental model I previously had was a single framebuffer sitting at the end of the display pipeline getting">
+    <meta name="twitter:image" content="http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/display-pipeline.svg">
+
+
+
+
+    <link rel="shortcut icon" href="/img/unbothered.png">
+
+
+
+
+    <link rel="icon" type="image/png" href="/img/unbothered.png" sizes="192x192">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/unbothered.png">
+
+
+    <!-- title -->
+    <title>Exploring Hardware Compositing With the Raspberry Pi</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/blog/css/style.css">
+    <!-- persian styles -->
+
+    <link rel="stylesheet" href="/blog/css/rtl.css">
+
+    <!-- rss -->
+
+
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+        <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+        <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+        <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+        <span id="menu">
+            <span id="nav">
+                <ul>
+
+                    <li><a href="/blog/index.html">Home</a></li>
+                    <!-- 
+                    <li><a href="https://benjdoherty.com/about">About</a></li>
+
+                    <li><a href="/archives/">Writing</a></li>
+
+                    <li><a href="https://benjdoherty.com/">Projects</a></li> -->
+
+                </ul>
+            </span>
+        <br />
+        <span id="actions">
+                <ul>
+
+
+                    <li><a class="icon" href="/blog/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"><i
+                                class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                                onmouseout="$('#i-next').toggle();"></i></a></li>
+
+                    <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i
+                                class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();"
+                                onmouseout="$('#i-top').toggle();"></i></a></li>
+                    <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true"
+                                onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                                onclick="$('#share').toggle();return false;"></i></a></li>
+                </ul>
+                <span id="i-prev" class="info" style="display:none;">Previous post</span>
+        <span id="i-next" class="info" style="display:none;">Next post</span>
+        <span id="i-top" class="info" style="display:none;">Back to top</span>
+        <span id="i-share" class="info" style="display:none;">Share post</span>
+        </span>
+        <br />
+        <div id="share" style="display: none">
+            <ul>
+                <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/"><i
+                                class="fab fa-facebook " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/&text=Exploring Hardware Compositing With the Raspberry Pi"><i
+                                class="fab fa-twitter " aria-hidden="true"></i></a></li>
+            </ul>
+
+        </div>
+        <div id="toc">
+            <ol class="toc">
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span
+                                class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Introducing-the-HVS"><span
+                                class="toc-number">2.</span> <span class="toc-text">Introducing the HVS</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#The-Display-List"><span
+                                class="toc-number">3.</span> <span class="toc-text">The Display List</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Where-the-Display-List-Lives"><span
+                                class="toc-number">4.</span> <span class="toc-text">Where the Display List
+                                Lives</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#A-Single-Plane-Display-List"><span
+                                class="toc-number">5.</span> <span class="toc-text">A Single Plane Display
+                                List</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#The-hvs-plane-Struct"><span
+                                class="toc-number">6.</span> <span class="toc-text">The hvs_plane Struct</span></a>
+                    <ol class="toc-child">
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Pixel-Format"><span
+                                        class="toc-number">6.1.</span> <span class="toc-text">Pixel Format</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Pixel-Order"><span
+                                        class="toc-number">6.2.</span> <span class="toc-text">Pixel Order</span></a>
+                        </li>
+                    </ol>
+                </li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Writing-the-Display-List"><span
+                                class="toc-number">7.</span> <span class="toc-text">Writing the Display List</span></a>
+                    <ol class="toc-child">
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Control-Word"><span
+                                        class="toc-number">7.1.</span> <span class="toc-text">Control Word</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-0"><span
+                                        class="toc-number">7.2.</span> <span class="toc-text">Position Word 0</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-2"><span
+                                        class="toc-number">7.3.</span> <span class="toc-text">Position Word 2</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-3"><span
+                                        class="toc-number">7.4.</span> <span class="toc-text">Position Word 3</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Word"><span
+                                        class="toc-number">7.5.</span> <span class="toc-text">Pointer Word</span></a>
+                        </li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Context-Word"><span
+                                        class="toc-number">7.6.</span> <span class="toc-text">Pointer Context
+                                        Word</span></a></li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Pitch-Word"><span
+                                        class="toc-number">7.7.</span> <span class="toc-text">Pitch Word</span></a></li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#End-of-Display-List"><span
+                                        class="toc-number">7.8.</span> <span class="toc-text">End of Display
+                                        List</span></a></li>
+                    </ol>
+                </li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-It-Out"><span
+                                class="toc-number">8.</span> <span class="toc-text">Testing It Out</span></a>
+                    <ol class="toc-child">
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-a-Framebuffer"><span
+                                        class="toc-number">8.1.</span> <span class="toc-text">Getting a
+                                        Framebuffer</span></a></li>
+                        <li class="toc-item toc-level-3"><a class="toc-link" href="#Informing-The-HVS-Of-Our-Display-List"><span class="toc-number">8.2.</span>
+                                    <span class="toc-text">Informing The HVS Of Our Display List</span></a></li>
+                    </ol>
+                </li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Adding-Additional-Planes"><span
+                                class="toc-number">9.</span> <span class="toc-text">Adding Additional Planes</span></a>
+                </li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Double-Buffering-the-Display-List"><span
+                                class="toc-number">10.</span> <span class="toc-text">Double-Buffering the Display
+                                List</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span
+                                class="toc-number">11.</span> <span class="toc-text">Conclusion</span></a></li>
+            </ol>
+        </div>
+        </span>
+    </div>
+
+
+    <div class="content index my4">
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+            <header>
+
+                <h1 class="posttitle" itemprop="name headline">
+                    Exploring Hardware Compositing With the Raspberry Pi
+                </h1>
+
+
+
+                <div class="meta">
+                    <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name">TimmyCoder's Blog</span>
+                    </span>
+
+                    <div class="postdate">
+                        <time datetime="2019-05-22T05:00:00.000Z" itemprop="datePublished">2019-05-21</time>
+                    </div>
+
+
+
+                    <div class="article-tag">
+                        <i class="fas fa-tag" style="color: #E76F51;"></i>
+                        <a class="tag-link" href="/blog/tags/Raspberry-Pi/">Android CustomView</a>
+                    </div>
+
+
+                </div>
+            </header>
+
+
+            <div class="content" itemprop="articleBody">
+                <h2 id="Introduction">
+                    <a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction
+                </h2>
+                <p>Hardware compositing is something I took for granted until earlier this year. The mental model I previously had was a single framebuffer sitting at the end of the display pipeline getting scanned out to whatever protocol the monitor supported.
+                    The OS’s windowing system then composited itself to that framebuffer through traditional GPU exchanges, using an API like OpenGL or Direct3D. When I learned about hardware compositing, specifically Android’s <a href="https://source.android.com/devices/graphics/arch-sf-hwc"
+                        target="_blank" rel="noopener">SurfaceFlinger</a>, I realized that some systems have the capability to offload some compositing work to a special hardware unit.</p>
+                <p>I’ve been interested in “pulling back the veil” of low-level graphics for awhile now, and given that Broadcom (the makers of the chip in the Pi) previously released documentation on the VideoCore® IV GPU inside the Raspberry Pi 3, this
+                    seemed like a good place to start.</p>
+                <p>So today we’re going to interface with the Raspberry Pi’s hardware composition unit, the Hardware Video Scaler, through a bare-metal kernel. If you want to follow along at home, read <a href="/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"
+                        title="Getting Started With the Raspberry Pi">Getting Started With the Raspberry Pi</a> first, which describes how I got up and running with kernel development on the Pi. I’m using a project called <a href="https://github.com/s-matyukevich/raspberry-pi-os"
+                        target="_blank" rel="noopener">raspberry-pi-os</a> as boilerplate for the kernel code, which gets us up and running quickly.</p>
+                <h2 id="Introducing-the-HVS">
+                    <a href="#Introducing-the-HVS" class="headerlink" title="Introducing the HVS"></a>Introducing the HVS
+                </h2>
+                <p>Getting pixels on the screen can be thought of as a pipeline. On one end, sits a framebuffer, a matrix of numbers waiting to be converted into light. On the other end, the monitor. The unit of the pipeline is the scanline, a row of pixels.</p>
+                <p>The chip used in the Raspberry Pi is a Broadcom 2835 System on a Chip (SoC). The Hardware Video Scaler, or HVS, is one of the components on the chip and is part of the display pipeline.</p>
+                <p>A brief overview of the display pipline will help orient us. Let’s work backwards starting with the monitor. Contained within the Pi’s SoC is an HDMI encoder. The HDMI encoder encodes pixels, scanline by scanline, down the physical wire
+                    to the monitor. The monitor decodes them, and turns on subpixels which emit various wavelengths of light that your brain perceives to be continous colors.</p>
+                <p>Uptream of the HDMI encoder is a memory buffer known as the FIFO. It temporarily houses scanlines until the HDMI encoder dequeues them. At the opposite end of the FIFO is the HVS. The HVS connects one or more framebuffers to the FIFO.
+                    It’s configured to read pixels from a chunk of memory (the framebuffer), and enqueue them, scanline by scanline, onto the FIFO.</p>
+                <img src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/display-pipeline.svg" title="The Raspberry Pi" alt="s display pipeline">
+                <p>As we’ll see, the HVS has a few tricks up its sleeve. It can be configured to composite framebuffers from different areas of memory into a single stream of pixels. It can also scale, rotate, and blend the framebuffers along the way.</p>
+                <p>Understanding that hardware compositors exist was one of my first “aha” moments of understanding low-level graphics. The pixels you see on your monitor can come from various regions of memory.</p>
+                <p>While Broadcom’s documentation covers the majority of the GPU, it doesn’t cover the HVS and I haven’t found any <em>offical</em> documentation on it in lieu of reading the Linux source code, which is primarily what I’ve done. So bare with
+                    me, and please let me know if I got anything wrong.</p>
+                <h2 id="The-Display-List">
+                    <a href="#The-Display-List" class="headerlink" title="The Display List"></a>The Display List
+                </h2>
+                <p>The HVS works by consuming a structure in memory called the <strong>display list</strong>, which is what we need to prepare. The display list lives in memory mapped I/O, a special portion of physical memory that allows the kernel to talk
+                    to peripherals, like the HVS. It appears just as any other memory address, and we can use regular ARM instructions to write to it.</p>
+                <p>The display list is simply a list of commands or <strong>words</strong>, 4 bytes each. They configure the scale, position, and other properties for each plane.</p>
+                <p>A plane is an image source to be composited into the final pixel stream with attributes such as its pixel format, where on screen it should be overlaid, if it should be scaled, how it should be rotated, etc. Remember, the HVS does the
+                    compositing <em>in real time</em>, i.e., it doesn’t “save” the result of the composition anywhere. Its logic works scanline-by-scanline. The result of the composition only exists as an illusion on your monitor. (This definition of
+                    plane is not to be confused with a plane such as a luminance plane in a YUV image.)</p>
+                <p>We’ll start by crafting a display list that composites a single plane on the screen (we’ll add more later). Let’s look at the words that make up a display list with a single plane:</p>
+                <ol>
+                    <li>Control Word</li>
+                    <li>Position Word 0</li>
+                    <li>Position Word 2</li>
+                    <li>Position Word 3</li>
+                    <li>Pointer Word</li>
+                    <li>Pointer Context Word</li>
+                    <li>Pitch Word</li>
+                    <li>End of Display List</li>
+                </ol>
+                <p>In this case, we have 7 words plus an “end of display list” word. 8 words * 4 bytes = 32 bytes in total.
+                </p>
+                <h2 id="Where-the-Display-List-Lives">
+                    <a href="#Where-the-Display-List-Lives" class="headerlink" title="Where the Display List Lives"></a>Where the Display List Lives
+                </h2>
+                <p>The display list memory lives at address <code>0x3F402000</code> which, as I mentioned, is in memory-mapped I/O that the HVS can access. We can treat this memory region as an array of 4 byte words:
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">uint32_t</span>* dlist_memory = (<span class="keyword">uint32_t</span>*) <span class="number">0x3F402000</span>;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Writing to the display list is a simple as:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line">dlist_memory[<span class="number">0</span>] = <span class="number">0x12345678</span>;   <span class="comment">// write a single word at offset 0</span></span><br><span class="line">dlist_memory[<span class="number">1</span>] = <span class="number">0x12345678</span>;   <span class="comment">// write a single word at offset 1</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>These writes have side-effects, so notice that the <code>volatile</code> keyword is used on the
+                    <code>dlist_memory</code> pointer. If we wrote to the memory location like any other, the C compiler would be free optimize away the write, because it’s never read back again by us.
+                </p>
+                <p>We’ll keep track of the current word offset and every time we write a word, increment the offset. The display list memory is 16 KiB in size- we can write as many display lists to it as we please. We’ll later see how we tell the HVS where
+                    in memory we’ve written our display list.</p>
+                <h2 id="A-Single-Plane-Display-List">
+                    <a href="#A-Single-Plane-Display-List" class="headerlink" title="A Single Plane Display List"></a>A Single Plane Display List
+                </h2>
+                <p>We’re going to start simple: a single plane centered in the screen. We’re assuming a 1920x1080 monitor, and the plane will take up a single quadrant (960x540):</p>
+                <img src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/first_plane.png" title="The centered plane on screen">
+                <p>If you like reading the Linux kernel in all its gory detail, follow along in <a href="https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/vc4/vc4_plane.c" target="_blank" rel="noopener">vc4_plane.c</a>. The function is called
+                    <code>vc4_plane_mode_set</code>. By the way, different systems refer to hardware compositing by different names. In Linux, it’s part of KMS, <a href="https://wiki.archlinux.org/index.php/kernel_mode_setting" target="_blank" rel="noopener">kernel mode setting</a>.
+                </p>
+                <h2 id="The-hvs-plane-Struct">
+                    <a href="#The-hvs-plane-Struct" class="headerlink" title="The hvs_plane Struct"></a>The hvs_plane Struct
+                </h2>
+                <p>We’ll be filling in the details for this function as we go along:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">write_plane</span><span class="params">(<span class="keyword">uint16_t</span>* offset, hvs_plane plane)</span></span>;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>The function will write a plane to display list memory at the given word offset. <code>offset</code> is passed as a pointer. The function will increment the offset for each word so the caller knows how many have been written. We can define
+                    a macro that will write out a word and increment the offset:
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WRITE_WORD(word) (dlist_memory[(*offset)++] = word)</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p><code>write_plane</code> takes a <code>hvs_plane</code> struct which we need to define. It contains all the necessary information to write out the plane:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    hvs_pixel_format format;            <span class="comment">// format of the pixels in the plane</span></span><br><span class="line">    hvs_pixel_order pixel_order;        <span class="comment">// order of the components in each pixel</span></span><br><span class="line">    <span class="keyword">uint16_t</span> start_x;                   <span class="comment">// x position of the left of the plane</span></span><br><span class="line">    <span class="keyword">uint16_t</span> start_y;                   <span class="comment">// y position of the top of the plane</span></span><br><span class="line">    <span class="keyword">uint16_t</span> height;                    <span class="comment">// height of the plane, in pixels</span></span><br><span class="line">    <span class="keyword">uint16_t</span> width;                     <span class="comment">// width of the plane, in pixels</span></span><br><span class="line">    <span class="keyword">uint16_t</span> pitch;                     <span class="comment">// number of bytes between the start of each scanline</span></span><br><span class="line">    <span class="keyword">void</span>* framebuffer;                  <span class="comment">// pointer to the pixels in memory</span></span><br><span class="line">&#125; hvs_plane;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>The rough equivalent in the Linux kernel, if you’re interested in comparing, is a struct called <a href="https://elixir.bootlin.com/linux/latest/source/include/drm/drm_plane.h#L47" target="_blank" rel="noopener"><code>drm_plane_state</code></a>.</p>
+                <p>There’s two enums used in <code>hvs_plane</code> that need some explanation,
+                    <code>hvs_pixel_format</code> and <code>hvs_pixel_order</code>.
+                </p>
+                <h3 id="Pixel-Format">
+                    <a href="#Pixel-Format" class="headerlink" title="Pixel Format"></a>Pixel Format
+                </h3>
+                <p>The <code>hvs_pixel_format</code> is an enum that tells the HVS what type of pixels are in our framebuffer. Here we see some of the pixel formats that the HVS natively supports:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">    <span class="comment">/* 8bpp */</span></span><br><span class="line">    HVS_PIXEL_FORMAT_RGB332 = <span class="number">0</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 16bpp */</span></span><br><span class="line">    HVS_PIXEL_FORMAT_RGBA4444 = <span class="number">1</span>,</span><br><span class="line">    HVS_PIXEL_FORMAT_RGB555 = <span class="number">2</span>,</span><br><span class="line">    HVS_PIXEL_FORMAT_RGBA5551 = <span class="number">3</span>,</span><br><span class="line">    HVS_PIXEL_FORMAT_RGB565 = <span class="number">4</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 24bpp */</span></span><br><span class="line">    HVS_PIXEL_FORMAT_RGB888 = <span class="number">5</span>,</span><br><span class="line">    HVS_PIXEL_FORMAT_RGBA6666 = <span class="number">6</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 32bpp */</span></span><br><span class="line">    HVS_PIXEL_FORMAT_RGBA8888 = <span class="number">7</span>,</span><br><span class="line">&#125; hvs_pixel_format;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>I left a few out, like YUV. You can see <a href="https://github.com/torvalds/linux/blob/63863ee8e2f6f6ae47be3dff4af2f2806f5ca2dd/drivers/gpu/drm/vc4/vc4_regs.h#L810" target="_blank" rel="noopener">the full list in the Linux driver</a>.</p>
+                <p><code>HVS_PIXEL_FORMAT_RGB565</code> is the format we’ll be working with. Each pixel is 16 bits. The first 5 bits are for red, the next 6 for green, and the last 5 for blue.</p>
+                <h3 id="Pixel-Order">
+                    <a href="#Pixel-Order" class="headerlink" title="Pixel Order"></a>Pixel Order
+                </h3>
+                <p>The order of the pixels is another enum, one of the following (also taken straight from the VC4 driver):
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">    HVS_PIXEL_ORDER_RGBA = <span class="number">0</span>,</span><br><span class="line">    HVS_PIXEL_ORDER_BGRA = <span class="number">1</span>,</span><br><span class="line">    HVS_PIXEL_ORDER_ARGB = <span class="number">2</span>,</span><br><span class="line">    HVS_PIXEL_ORDER_ABGR = <span class="number">3</span></span><br><span class="line">&#125; hvs_pixel_order;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>So far as I can tell, the HVS requires the alpha component to come first (if there is one), so we’ll always use HVS_PIXEL_ORDER_ARGB.</p>
+                <h2 id="Writing-the-Display-List">
+                    <a href="#Writing-the-Display-List" class="headerlink" title="Writing the Display List"></a>Writing the Display List
+                </h2>
+                <p>We’re now ready to take the <code>hvs_plane</code> and write out a display list.</p>
+                <h3 id="Control-Word">
+                    <a href="#Control-Word" class="headerlink" title="Control Word"></a>Control Word
+                </h3>
+                <p>First up is the control word. It conveys:</p>
+                <ol>
+                    <li>A signal bit that this word is the start of a plane</li>
+                    <li>A signal bit that the plane has no scaling</li>
+                    <li>The pixel format</li>
+                    <li>The pixel component order</li>
+                    <li>The number of words in this plane</li>
+                </ol>
+                <p>The control word is formed by bitshifting and ORing all of that together.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Control word */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> number_of_words = <span class="number">7</span>;</span><br><span class="line"><span class="keyword">uint32_t</span> control_word = SCALER_CTL0_VALID              |        <span class="comment">// denotes the start of a plane</span></span><br><span class="line">                        SCALER_CTL0_UNITY              |        <span class="comment">// indicates no scaling</span></span><br><span class="line">                        plane.pixel_order       &lt;&lt; <span class="number">13</span>  |        <span class="comment">// pixel order</span></span><br><span class="line">                        number_of_words         &lt;&lt; <span class="number">24</span>  |        <span class="comment">// number of words in this plane</span></span><br><span class="line">                        plane.format;                           <span class="comment">// pixel format</span></span><br><span class="line">WRITE_WORD(control_word);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>This is a pattern you’ll see with these words. We cram several arguments into a single word by bitshifting some over so they can fit within 32 bits. I figured out the amount to bitshift by taking a look at the Linux kernel driver.</p>
+                <p><code>SCALER_CTL0_VALID</code> and <code>SCALER_CTL0_UNITY</code> are defined as such:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCALER_CTL0_VALID                       1U &lt;&lt; 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCALER_CTL0_UNITY                       1U &lt;&lt; 4</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>These are just signals to the HVS.</p>
+                <h3 id="Position-Word-0">
+                    <a href="#Position-Word-0" class="headerlink" title="Position Word 0"></a>Position Word 0
+                </h3>
+                <p>Position Word 0 conveys the plane’s position on screen. It contains the X and Y positions:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Position Word 0 */</span></span><br><span class="line"><span class="keyword">uint32_t</span> position_word_0 = plane.start_x        &lt;&lt; <span class="number">0</span>   |</span><br><span class="line">                           plane.start_y        &lt;&lt; <span class="number">12</span>;</span><br><span class="line">WRITE_WORD(position_word_0);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="Position-Word-2">
+                    <a href="#Position-Word-2" class="headerlink" title="Position Word 2"></a>Position Word 2
+                </h3>
+                <p>Position Word 2 conveys the dimensions of the framebuffer, its width and height in pixels.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Position Word 2 */</span></span><br><span class="line"><span class="keyword">uint32_t</span> position_word_2 = plane.width         &lt;&lt; <span class="number">0</span>    |</span><br><span class="line">                           plane.height        &lt;&lt; <span class="number">16</span>;</span><br><span class="line">WRITE_WORD(position_word_2);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Note that I’m refering to this word as Position Word 2, even though we skipped over a “Position Word 1” as you might expect. The so-called Position Word 1 is only present if we’re doing scaling, which we aren’t. I’ve kept the names the
+                    same as their Linux kernel counterparts, for those following along.
+                </p>
+                <h3 id="Position-Word-3">
+                    <a href="#Position-Word-3" class="headerlink" title="Position Word 3"></a>Position Word 3
+                </h3>
+                <p>The position word 3 is super easy. Its just a placeholder for the HVS to store some context information for its own use, which we don’t have to worry about. Leave it uninitialized (but be sure to skip a word) or fill it with your favorite
+                    <a href="https://en.wikipedia.org/wiki/Hexspeak" target="_blank" rel="noopener">Hexspeak</a>:
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Position Word 3: used by HVS */</span></span><br><span class="line">WRITE_WORD(<span class="number">0xDEADBEEF</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="Pointer-Word">
+                    <a href="#Pointer-Word" class="headerlink" title="Pointer Word"></a>Pointer Word
+                </h3>
+                <p>The pointer word is important- it gives the memory location of the actual framebuffer. We’ll set up the memory later- for now, just write out the pointer present in the struct:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* This cast is okay, because the framebuffer pointer can always be held in 4 bytes</span></span><br><span class="line"><span class="comment">   even though we're on a 64 bit architecture. */</span></span><br><span class="line"><span class="keyword">uint32_t</span> framebuffer = (<span class="keyword">uint32_t</span>) (<span class="keyword">intptr_t</span>) plane.framebuffer;</span><br><span class="line">WRITE_WORD(framebuffer);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>By the way, if you’re familiar with the concept of <a href="https://en.wikipedia.org/wiki/Multiple_buffering#Page_flipping" target="_blank" rel="noopener">page flipping</a>, this would be the pointer you’d “flip” to implement it.</p>
+                <h3 id="Pointer-Context-Word">
+                    <a href="#Pointer-Context-Word" class="headerlink" title="Pointer Context Word"></a>Pointer Context Word
+                </h3>
+                <p>The Pointer Context Word is another placeholder word for the HVS to use for its own bidding:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Pointer Context: used by HVS */</span></span><br><span class="line">WRITE_WORD(<span class="number">0xDEADBEEF</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="Pitch-Word">
+                    <a href="#Pitch-Word" class="headerlink" title="Pitch Word"></a>Pitch Word
+                </h3>
+                <p>Last but not least there’s the Pitch Word. The Pitch Word conveys the pitch of the framebuffer, also known as stride. This is the number of bytes in a row of pixels.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Pitch word */</span></span><br><span class="line"><span class="keyword">uint32_t</span> pitch_word = plane.pitch;</span><br><span class="line">WRITE_WORD(pitch_word);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="End-of-Display-List">
+                    <a href="#End-of-Display-List" class="headerlink" title="End of Display List"></a>End of Display List
+                </h3>
+                <p>We’ve finished writing the display list for the first plane. If we had additional planes, this is where they’d go. Since we’re only doing one for now, we need to move on to the the final word of the display list, which signifies that the
+                    whole thing is done.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* End word */</span></span><br><span class="line">WRITE(SCALER_CTL0_END);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p><code>SCALER_CTL0_END</code> is defined as such:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCALER_CTL0_END                         1U &lt;&lt; 31</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Again, it’s just another signal bit that tells the HVS that the display list has finished.</p>
+                <h2 id="Testing-It-Out">
+                    <a href="#Testing-It-Out" class="headerlink" title="Testing It Out"></a>Testing It Out
+                </h2>
+                <p>And that’s a basic display list! There’s a few more things we need to do before we can can test it out. First off, we need to create the framebuffer.</p>
+                <h3 id="Getting-a-Framebuffer">
+                    <a href="#Getting-a-Framebuffer" class="headerlink" title="Getting a Framebuffer"></a>Getting a Framebuffer
+                </h3>
+                <p>Let’s talk for a minute about the memory layout of the Pi. Remember, we’re writing kernel code. That means our code is running <em>directly</em> on the Pi without the luxeries of an operating system beneath us. Most pertinent to us is
+                    forgone the concept of virtual memory- we have only
+                    <em>physical</em> memory- about 1 GB. We don’t have any <code>malloc</code> function at our disposal. In our case, we’ll need room for some framebuffers. These framebuffers can go almost anywhere in the address space- the Pi has a
+                    unified memory architecture, so the GPU can see all of RAM.
+                </p>
+                <p>There’s a few locations that are off-limits:</p>
+                <ol>
+                    <li>Anything above <code>0x3F000000</code> is peripheral memory</li>
+                    <li>Our stack starts at <code>0x00400000</code> and grows downward</li>
+                    <li>The kernel image itself sits at <code>0x00080000</code></li>
+                </ol>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line">    ^</span><br><span class="line">    |</span><br><span class="line">0x3F000000              &lt;-- peripheral base (memory-mapped I/O)</span><br><span class="line"></span><br><span class="line">~ free space ~</span><br><span class="line"></span><br><span class="line">0x00400000              &lt;-- stack (grows downward)</span><br><span class="line">    |</span><br><span class="line">    v</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ^                   &lt;-- kernel image</span><br><span class="line">    |</span><br><span class="line">0x00080000              &lt;-- raspi bootloader loads kernel8.img here</span><br><span class="line"></span><br><span class="line">0x00000000</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>We don’t want to overwrite anything important. Address <code>0x10000000</code> will do nicely, giving us plenty of room for additional framebuffers.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">uint16_t</span>* <span class="keyword">const</span> framebuffer = (<span class="keyword">uint16_t</span>*)(<span class="number">0x10000000</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>That’s it. We cast it to a <code>uint16_t</code> pointer because we’re using a 16 bit pixel format,
+                    <code>RGB565</code>.
+                </p>
+                <h3 id="Informing-The-HVS-Of-Our-Display-List">
+                    <a href="#Informing-The-HVS-Of-Our-Display-List" class="headerlink" title="Informing The HVS Of Our Display List"></a>Informing The HVS Of Our Display List
+                </h3>
+                <p>Let’s create a <code>hvs_plane</code> and call our function, writing it to the display list at offset 0. This plane will be a quarter of the screen size, centered in the middle:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">const</span> <span class="keyword">uint16_t</span> screen_width = <span class="number">1920</span>, screen_height = <span class="number">1080</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint16_t</span> fb_width = screen_width / <span class="number">2</span>, fb_height = screen_height / <span class="number">2</span>;</span><br><span class="line">hvs_plane plane = &#123;</span><br><span class="line">    .format = HVS_PIXEL_FORMAT_RGB565,</span><br><span class="line">    .pixel_order = HVS_PIXEL_ORDER_ARGB,</span><br><span class="line">    .start_x = (screen_width - fb_width) / <span class="number">2</span>,</span><br><span class="line">    .start_y = (screen_height - fb_height) / <span class="number">2</span>,</span><br><span class="line">    .height = fb_height,</span><br><span class="line">    .width = fb_width,</span><br><span class="line">    .pitch = fb_width * <span class="keyword">sizeof</span>(<span class="keyword">uint16_t</span>),</span><br><span class="line">    .framebuffer = <span class="number">0x10000000</span></span><br><span class="line">&#125;;</span><br><span class="line">write_plane(<span class="number">0</span>, plane);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>All that’s left to do is tell the HVS where the display list is. There’s another special memory location which is memory-mapped to a register on the HVS, called <code>SCALER_DISPLIST1</code>. It’s at <code>0x3F400024</code>.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Tell the HVS where the display list is by writing to the SCALER_DISPLIST1 register. */</span></span><br><span class="line">put32(SCALER_DISPLIST1, <span class="number">0</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>The <code>put32</code> function is inherited from the <code>raspberry-pi-os</code> project:</p>
+                <figure class="highlight arm">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="symbol">.globl</span> put32</span><br><span class="line"><span class="symbol">put32</span>:</span><br><span class="line">	<span class="keyword">str </span>w1,[x0]</span><br><span class="line">	ret</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>It merely stores a 32 bit word to a memory location. We use this function to write to the register for similar reasons to why we marked the <code>dlist_memory</code> pointer as <code>volatile</code>- so the C compiler won’t optimize the
+                    write away.</p>
+                <p>By the way, here’s a <a href="https://elinux.org/BCM2835_registers#SCALER" target="_blank" rel="noopener">listing of all the HVS registers</a> on the Pi. If you search for
+                    <code>SCALER_DISPLIST1</code>, you’ll see that it’s listed at address <code>0x7E400024</code>, not
+                    <code>0x3F400024</code>. The <a href="https://www.raspberrypi.org/app/uploads/2012/02/BCM2835-ARM-Peripherals.pdf" target="_blank" rel="noopener">BCM2835 Peripheral Guide</a> clears up that ambiguity:
+                </p>
+                <blockquote>
+                    <p>The bus addresses for peripherals are set up to map onto the peripheral bus address range starting at 0x7E000000. Thus a peripheral advertised here at bus address 0x7Ennnnnn is available at physical address 0x20nnnnnn.</p>
+                </blockquote>
+                <p>If you run the kernel on the Pi, you should see something that looks like this:</p>
+                <img src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/uninitialized_fb.jpeg" title="My first (uninitialized) plane">
+                <p>What we’re looking at is an uninitialized framebuffer! Adding a <code>clear_plane</code> function is easy enough:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear_plane_16</span><span class="params">(hvs_plane plane, <span class="keyword">uint16_t</span> color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint16_t</span>* pixels = (<span class="keyword">uint16_t</span>*) plane.framebuffer;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; plane.width * plane.height; ++i) &#123;</span><br><span class="line">        pixels[i] = color;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>We’ll call it <code>clear_plane_16</code> as it’s clearing a 16 bit framebuffer.</p>
+                <p>Let’s clear the memory <em>after</em> we’ve set up the display list so we see the clear in “real time.”
+                </p>
+                <p>It’s also easy to implement some drawing functions, like <code>draw_rectangle</code>, and
+                    <code>draw_circle</code>. These are inside of <a href="https://github.com/bejado/raspberry-pi-os/blob/master/src/hvs/src/draw.c" target="_blank" rel="noopener"><code>draw.c</code></a>.
+                </p>
+                <p>Here’s another run, this time with clearing and drawing some shapes:</p>
+                <video controls><br>
+                    <source
+                        src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/my_first_framebuffer.webm"
+                        type="video/webm"><br>
+                </video>
+
+                <h2 id="Adding-Additional-Planes">
+                    <a href="#Adding-Additional-Planes" class="headerlink" title="Adding Additional Planes"></a>Adding Additional Planes
+                </h2>
+                <p>Adding additional planes is easy. Let’s refactor and add a new function called
+                    <code>write_display_list</code>, which will take an array of planes. All we need to do is loop through the planes, write each out, and then write the End Word after (make sure to remove the End Word write from <code>write_plane</code>,
+                    so it’s only written once):
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write_display_list</span><span class="params">(hvs_plane planes[], <span class="keyword">uint8_t</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">uint16_t</span> offset = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Write out each plane. */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint8_t</span> p = <span class="number">0</span>; p &lt; count; p++) &#123;</span><br><span class="line">        write_plane(&amp;offset, planes[p]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* End word */</span></span><br><span class="line">    dlist_memory[offset] = SCALER_CTL0_END;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Tell the HVS where the display list is by writing to the SCALER_DISPLIST1 register. */</span></span><br><span class="line">    put32(SCALER_DISPLIST1, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>The HVS can merge several different formats together, so as a demonstration, we’ll choose a different pixel format for one of the framebuffers. Let’s use the <code>RGBA8</code> format, which will also let us test alpha blending. Note that
+                    this framebuffer will need additional memory compared to the 16 bit framebuffers. That’s okay as there’s nothing else for it to collide with.</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* "Allocate" 4 framebuffers in memory. Each is 1MiB in size, which is plenty for our purposes. */</span></span><br><span class="line"><span class="keyword">uint16_t</span>* <span class="keyword">const</span> fb_one     = (<span class="keyword">uint16_t</span>*)(<span class="number">0x10000000</span>);   <span class="comment">// the first 3 will use 16-bit pixels.</span></span><br><span class="line"><span class="keyword">uint16_t</span>* <span class="keyword">const</span> fb_two     = (<span class="keyword">uint16_t</span>*)(<span class="number">0x10100000</span>);</span><br><span class="line"><span class="keyword">uint16_t</span>* <span class="keyword">const</span> fb_three   = (<span class="keyword">uint16_t</span>*)(<span class="number">0x10200000</span>);</span><br><span class="line"><span class="keyword">uint32_t</span>* <span class="keyword">const</span> fb_four    = (<span class="keyword">uint32_t</span>*)(<span class="number">0x10300000</span>);   <span class="comment">// this one will use a 32-bit pixel format.</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Then we can initialize the display list with 4 planes, each one taking up a quadrant of the screen:
+                </p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Set up 4 planes. */</span></span><br><span class="line">hvs_plane planes[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">2</span>; y++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">2</span>; x++) &#123;</span><br><span class="line">        planes[i].format = HVS_PIXEL_FORMAT_RGB565,</span><br><span class="line">        planes[i].pixel_order = HVS_PIXEL_ORDER_ARGB,</span><br><span class="line">        planes[i].start_x = fb_width * x;</span><br><span class="line">        planes[i].start_y = fb_height * y;</span><br><span class="line">        planes[i].height = fb_height,</span><br><span class="line">        planes[i].width = fb_width,</span><br><span class="line">        planes[i].pitch = fb_width * <span class="number">2</span>,</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">planes[<span class="number">0</span>].framebuffer = fb_one;</span><br><span class="line">planes[<span class="number">1</span>].framebuffer = fb_two;</span><br><span class="line">planes[<span class="number">2</span>].framebuffer = fb_three;</span><br><span class="line">planes[<span class="number">3</span>].framebuffer = fb_four;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* We'll make the fourth framebuffer a 32-bit pixel format, just for demonstrations. */</span></span><br><span class="line">planes[<span class="number">3</span>].format = HVS_PIXEL_FORMAT_RGBA8888;</span><br><span class="line">planes[<span class="number">3</span>].pitch = fb_width * <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>write them out to the display list:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line">write_display_list(planes, <span class="number">4</span>);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>and clear them:</p>
+                <figure class="highlight c">
+                    <table>
+                        <tr>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">/* Clear the 4 framebuffers. */</span></span><br><span class="line">clear_plane_16(planes[<span class="number">0</span>], BLUE_16);</span><br><span class="line">clear_plane_16(planes[<span class="number">1</span>], WHITE_16);</span><br><span class="line">clear_plane_16(planes[<span class="number">2</span>], RED_16);</span><br><span class="line">clear_plane_32(planes[<span class="number">3</span>], YELLOW_32);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Here’s what it looks like for me:</p>
+                <video controls><br>
+                    <source
+                        src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/four_framebuffers.webm"
+                        type="video/webm"><br>
+                </video>
+
+                <h2 id="Double-Buffering-the-Display-List">
+                    <a href="#Double-Buffering-the-Display-List" class="headerlink" title="Double-Buffering the Display List"></a>Double-Buffering the Display List
+                </h2>
+                <p>There’s one more improvement we should make. If we want to update a display list (for animation, for example), we can’t just write over the current one being used by the HVS. Remember, the HVS is continuously scanning out pixels, and updating
+                    the display list needs to be done atomically, otherwise we’ll see a brief flash of who-knows-what.
+                </p>
+                <p>What we’ll do is keep 2 display list “slots” in display list memory, far enough apart that we need not worry about them stepping on each other. Call them A and B. We’ll start out writing our display list to slot A and set <code>SCALER_DISPLIST1</code>                    to A’s location. When we need to perform an update, we’ll write out to display list slot B, then atomically update <code>SCALER_DISPLIST1</code> to point to B. Next time we update, we’ll write to A, and so on. We’re essentially “double-buffering”
+                    our display list.</p>
+                <p>This means we have to recalculate the display list every time <code>write_display_list</code> is called, but this is good enough for our simple usage.</p>
+                <p>The final implementation can be found <a href="https://github.com/bejado/raspberry-pi-os/tree/master/src/hvs" target="_blank" rel="noopener">here on GitHub</a>, along with the rest of the source code. <a href="https://github.com/bejado/raspberry-pi-os/blob/master/src/hvs/src/hvs.c"
+                        target="_blank" rel="noopener">src/hvs.c</a> has the interesting HVS code.</p>
+                <p>I updated <a href="https://github.com/bejado/raspberry-pi-os/blob/master/src/hvs/src/kernel.c" target="_blank" rel="noopener">kernel.c</a> with a full showcase of the HVS, demonstrating multiple planes, positioning, and transparent blending.
+                    At the end, it goes into a loop, swapping the framebuffers around:</p>
+                <video controls><br>
+                    <source src="/blog/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/showcase.webm"
+                        type="video/webm"><br>
+                </video>
+
+                <h2 id="Conclusion">
+                    <a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion
+                </h2>
+                <p>I hope this gives you a sense of the possibilities of hardware compositors. This only skims the surface of what’s possible with the RPi’s HVS. Among other features are YUV framebuffers, color conversion, scaling, and rotation. Armed with
+                    this knowledge, exploring the VC4 driver in the Linux kernel should be a bit less daunting.</p>
+                <p>If you’re interested in exploring the concept further, check out Android’s documentation on the <a href="https://source.android.com/devices/graphics/implement-hwc" target="_blank" rel="noopener">Hardware Composer HAL</a>, which describes
+                    the interface hardware vendors implement to support hardware compositing on Android. Armed with knowledge of the Pi’s HVS, you can begin to imagine what an implementation looks like.</p>
+                <p>That’s it for now. In a future post, I’d love to take a look at getting some GPU triangles on the screen!
+                </p>
+
+            </div>
+        </article>
+
+        <div class="blog-post-comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div id="footer-post-container">
+        <div id="footer-post">
+
+            <div id="nav-footer" style="display: none">
+                <ul>
+
+                    <li><a href="/blog/index.html">Home</a></li>
+
+                    <!-- <li><a href="https://benjdoherty.com/about">About</a></li>
+
+                    <li><a href="/archives/">Writing</a></li>
+
+                    <li><a href="https://benjdoherty.com/">Projects</a></li> -->
+
+                </ul>
+            </div>
+
+            <div id="toc-footer" style="display: none">
+                <ol class="toc">
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span
+                                class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Introducing-the-HVS"><span
+                                class="toc-number">2.</span> <span class="toc-text">Introducing the HVS</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#The-Display-List"><span
+                                class="toc-number">3.</span> <span class="toc-text">The Display List</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Where-the-Display-List-Lives"><span
+                                class="toc-number">4.</span> <span class="toc-text">Where the Display List
+                                Lives</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#A-Single-Plane-Display-List"><span
+                                class="toc-number">5.</span> <span class="toc-text">A Single Plane Display
+                                List</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#The-hvs-plane-Struct"><span
+                                class="toc-number">6.</span> <span class="toc-text">The hvs_plane Struct</span></a>
+                        <ol class="toc-child">
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Pixel-Format"><span
+                                        class="toc-number">6.1.</span> <span class="toc-text">Pixel Format</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Pixel-Order"><span
+                                        class="toc-number">6.2.</span> <span class="toc-text">Pixel Order</span></a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Writing-the-Display-List"><span
+                                class="toc-number">7.</span> <span class="toc-text">Writing the Display List</span></a>
+                        <ol class="toc-child">
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Control-Word"><span
+                                        class="toc-number">7.1.</span> <span class="toc-text">Control Word</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-0"><span
+                                        class="toc-number">7.2.</span> <span class="toc-text">Position Word 0</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-2"><span
+                                        class="toc-number">7.3.</span> <span class="toc-text">Position Word 2</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Position-Word-3"><span
+                                        class="toc-number">7.4.</span> <span class="toc-text">Position Word 3</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Word"><span
+                                        class="toc-number">7.5.</span> <span class="toc-text">Pointer Word</span></a>
+                            </li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Context-Word"><span
+                                        class="toc-number">7.6.</span> <span class="toc-text">Pointer Context
+                                        Word</span></a></li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Pitch-Word"><span
+                                        class="toc-number">7.7.</span> <span class="toc-text">Pitch Word</span></a></li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#End-of-Display-List"><span
+                                        class="toc-number">7.8.</span> <span class="toc-text">End of Display
+                                        List</span></a></li>
+                        </ol>
+                    </li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-It-Out"><span
+                                class="toc-number">8.</span> <span class="toc-text">Testing It Out</span></a>
+                        <ol class="toc-child">
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-a-Framebuffer"><span
+                                        class="toc-number">8.1.</span> <span class="toc-text">Getting a
+                                        Framebuffer</span></a></li>
+                            <li class="toc-item toc-level-3"><a class="toc-link" href="#Informing-The-HVS-Of-Our-Display-List"><span class="toc-number">8.2.</span>
+                                    <span class="toc-text">Informing The HVS Of Our Display List</span></a></li>
+                        </ol>
+                    </li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Adding-Additional-Planes"><span
+                                class="toc-number">9.</span> <span class="toc-text">Adding Additional Planes</span></a>
+                    </li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Double-Buffering-the-Display-List"><span
+                                class="toc-number">10.</span> <span class="toc-text">Double-Buffering the Display
+                                List</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span
+                                class="toc-number">11.</span> <span class="toc-text">Conclusion</span></a></li>
+                </ol>
+            </div>
+
+            <div id="share-footer" style="display: none">
+                <ul>
+                    <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/"><i
+                                class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/&text=Exploring Hardware Compositing With the Raspberry Pi"><i
+                                class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/&title=Exploring Hardware Compositing With the Raspberry Pi"><i
+                                class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+
+                </ul>
+
+            </div>
+
+            <div id="actions-footer">
+                <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i
+                        class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+                <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i
+                        class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+                <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i
+                        class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+                <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+                        aria-hidden="true"></i> Top</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        <div class="footer-left">
+            &copy; 2021
+        </div>
+        <div class="footer-right">
+            <nav>
+                <ul>
+                    <!-- <li>
+                        <a class="icon" href="/index.html">
+
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li> -->
+
+                    <li>
+                        <a class="icon" href="/index.html">
+                            <i class="fa fa-globe"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="icon" target="_blank" href="https://github.com/timmyCoder">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="icon" target="_blank" href="https://twitter.com/timmyCoder">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="icon" target="_blank" href="https://www.linkedin.com/in/daniel-olatoye/">
+                            <i class="fab fa-linkedin"></i>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="icon" target="_blank" href="mailto:olatoyedan@gmail.com">
+                            <i class="fas fa-envelope"></i>
+
+                        </a>
+                    </li>
+
+
+                    <!-- <li><a href="/archives/">Writing</a></li>
+
+                    <li><a href="https://benjdoherty.com/">Projects</a></li> -->
+
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/blog/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/blog/lib/jquery/jquery.min.js"></script>
+<script src="/blog/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->

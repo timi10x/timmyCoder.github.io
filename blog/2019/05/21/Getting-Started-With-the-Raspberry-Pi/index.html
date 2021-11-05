@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="I’ve recently begun exploration into the Raspberry Pi’s low-level graphics stack, for whimsey. Here I outline how I got started developing kernel code for the Raspberry Pi 3. If you’re not interested">
+    <meta name="keywords" content="Raspberry Pi">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Getting Started With the Raspberry Pi">
+    <meta property="og:url" content="http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/index.html">
+    <meta property="og:site_name" content="TimmyCoder&#39;s Blog">
+    <meta property="og:description" content="I’ve recently begun exploration into the Raspberry Pi’s low-level graphics stack, for whimsey. Here I outline how I got started developing kernel code for the Raspberry Pi 3. If you’re not interested">
+    <meta property="og:locale" content="default">
+    <meta property="og:updated_time" content="2019-05-22T04:52:44.243Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Getting Started With the Raspberry Pi">
+    <meta name="twitter:description" content="I’ve recently begun exploration into the Raspberry Pi’s low-level graphics stack, for whimsey. Here I outline how I got started developing kernel code for the Raspberry Pi 3. If you’re not interested">
+
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+
+
+
+    <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+
+
+    <!-- title -->
+    <title>Getting Started With the Raspberry Pi</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+
+    <link rel="stylesheet" href="/css/rtl.css">
+
+    <!-- rss -->
+
+
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+
+    <div id="header-post">
+        <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+        <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+        <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+        <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="https://benjdoherty.com/about">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://benjdoherty.com/">Projects</a></li>
+        
+      </ul>
+    </span>
+        <br/>
+        <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/07/Writing-a-minimal-boot-sector-for-the-v86-emulator/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+        <span id="i-next" class="info" style="display:none;">Next post</span>
+        <span id="i-top" class="info" style="display:none;">Back to top</span>
+        <span id="i-share" class="info" style="display:none;">Share post</span>
+        </span>
+        <br/>
+        <div id="share" style="display: none">
+            <ul>
+                <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&text=Getting Started With the Raspberry Pi"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&is_video=false&description=Getting Started With the Raspberry Pi"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="mailto:?subject=Getting Started With the Raspberry Pi&body=Check out this article: http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+                <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&name=Getting Started With the Raspberry Pi&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+            </ul>
+
+        </div>
+        <div id="toc">
+            <ol class="toc">
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Host-Machine"><span class="toc-number">1.</span> <span class="toc-text">Host Machine</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#The-Raspberry-Pi"><span class="toc-number">2.</span> <span class="toc-text">The Raspberry Pi</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Toolchain"><span class="toc-number">3.</span> <span class="toc-text">Toolchain</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Base-Code-Raspberry-Pi-OS"><span class="toc-number">4.</span> <span class="toc-text">Base Code - Raspberry Pi OS</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Serial-Bootloader-amp-Compiling"><span class="toc-number">5.</span> <span class="toc-text">Serial Bootloader &amp; Compiling</span></a></li>
+                <li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-Our-Setup"><span class="toc-number">6.</span> <span class="toc-text">Testing Our Setup</span></a></li>
+            </ol>
+        </div>
+        </span>
+    </div>
+
+
+    <div class="content index my4">
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+            <header>
+
+                <h1 class="posttitle" itemprop="name headline">
+                    Getting Started With the Raspberry Pi
+                </h1>
+
+
+
+                <div class="meta">
+                    <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">TimmyCoder's Blog</span>
+                    </span>
+
+                    <div class="postdate">
+                        <time datetime="2019-05-22T04:55:00.000Z" itemprop="datePublished">2019-05-21</time>
+                    </div>
+
+
+
+                    <div class="article-tag">
+                        <i class="fas fa-tag"></i>
+                        <a class="tag-link" href="/tags/Raspberry-Pi/">Raspberry Pi</a>
+                    </div>
+
+
+                </div>
+            </header>
+
+
+            <div class="content" itemprop="articleBody">
+                <p>I’ve recently begun exploration into the Raspberry Pi’s low-level graphics stack, for whimsey. Here I outline how I got started developing kernel code for the Raspberry Pi 3. If you’re not interested in the nuts and bolts of Raspberry
+                    Pi development sans OS, you can skip over this and head straight to <a href="/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/" title="Exploring Hardware Compositing With the Raspberry Pi">Exploring Hardware Compositing With the Raspberry Pi</a>,
+                    where the real fun begins. But if you’re interested in running the code for yourself, do read along.</p>
+                <p>In a nutshell, here’s what you need:</p>
+                <ol>
+                    <li>Host machine</li>
+                    <li>Raspberry Pi</li>
+                    <li>ARM toolchain for your host</li>
+                </ol>
+                <p>Technically optional, but highly recommended:</p>
+                <ol>
+                    <li>USB-to-TTL serial cable</li>
+                    <li>Serial bootloader</li>
+                </ol>
+                <h2 id="Host-Machine">
+                    <a href="#Host-Machine" class="headerlink" title="Host Machine"></a>Host Machine</h2>
+                <p>First off, you’ll need a host machine. That is, a computer <em>other</em> than the Pi. The host machine is where we’ll write and compile the OS kernel. I’m using a 2017 15” MacBook Pro that I’ve had great success with. I’m fairly confident
+                    that Windows and Linux are compatible as well, though I haven’t had any firsthand experience using them for RPi development.</p>
+                <h2 id="The-Raspberry-Pi">
+                    <a href="#The-Raspberry-Pi" class="headerlink" title="The Raspberry Pi"></a>The Raspberry Pi</h2>
+                <p>Of course, you’ll need a Pi as well. At the time of writing, the latest model is the Raspberry Pi 3 model B. I bought mine on Amazon as part of a kit which came with everything you need to get started with Pi development. It’s called the
+                    <a href="https://www.amazon.com/CanaKit-Raspberry-Complete-Starter-Kit/dp/B01C6Q2GSY" target="_blank" rel="noopener">CanaKit Raspberry Pi 3 Complete Starter Kit</a> and I highly recommend it. It comes with the Pi, power supply, SD
+                    card, HDMI cable, and even some heat sinks.</p>
+                <p>I also highly recommend getting a USB-to-TTL serial cable for debugging purposes. We’re going to be writing code that runs bare on the Pi’s ARM processor itself- without the luxuries of an OS to help us debug. The serial cable allows us
+                    to send and receive data to the Pi through a host machine. We’ll be using it to print output to our host so we can see what’s going on when things go awry. But perhaps more importantly, we’ll be compiling the OS on a host machine and
+                    using the serial connection to send the kernel to the Pi without needing to copy it to an SD card every time we want to make a modification (which will be quite often if you make as many mistakes as I do). If you’re using a Mac, follow
+                    <a href="https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/software-installation-mac" target="_blank" rel="noopener">this tutorial</a> to install the drivers for UART communication over the USB-to-TTL
+                    cable.</p>
+                <h2 id="Toolchain">
+                    <a href="#Toolchain" class="headerlink" title="Toolchain"></a>Toolchain</h2>
+                <p>The Pi has an ARM processor, so we need an ARM toolchain. I’m using a release of GCC that includes the ARM 64 target. It’s called <code>aarch64-none-elf</code> and I installed through Homebrew using <a href="https://github.com/SergioBenitez/homebrew-osxct"
+                        target="_blank" rel="noopener">this tap</a>. If you’re on Mac OS, it’s just:</p>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="code"><pre><span class="line">$ brew tap SergioBenitez/osxct</span><br><span class="line">$ brew install aarch64-none-elf</span><br></pre></td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="Base-Code-Raspberry-Pi-OS">
+                    <a href="#Base-Code-Raspberry-Pi-OS" class="headerlink" title="Base Code - Raspberry Pi OS"></a>Base Code - Raspberry Pi OS</h2>
+                <p>I didn’t want to start from <em>complete</em> scratch, so I forked a neat open source project called <a href="https://github.com/s-matyukevich/raspberry-pi-os" target="_blank" rel="noopener">raspberry-pi-os</a> which is a series of lessons
+                    on building a RPi homebrew OS from the ground up. I choose this as a starting point because it gives us a nice, minimal framework to mess around in. The result is a tiny OS that only communicates via the serial terminal, without ever
+                    outputing anything to the monitor actually connected to the Pi. We’re going to change that.</p>
+                <p>My project is hosted <a href="https://github.com/bejado/raspberry-pi-os/tree/master/src/hvs" target="_blank" rel="noopener">here on GitHub</a>. I based my changes off of lesson 1, which is a nice, minimal starting point. The project provides
+                    a working Makefile and some code to power the Pi’s <a href="https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter" target="_blank" rel="noopener">mini UART</a>. I copied the <code>printf</code> implementation from
+                    lesson 2, which allows us to <code>printf</code> directly to UART. I also added a <code>debug_print_memory</code> which prints a region of memory in hexadecimal to the screen. This will be essential later on.</p>
+                <h2 id="Serial-Bootloader-amp-Compiling">
+                    <a href="#Serial-Bootloader-amp-Compiling" class="headerlink" title="Serial Bootloader &amp; Compiling"></a>Serial Bootloader &amp; Compiling</h2>
+                <p>How do we get our compiled kernel on to the Raspberry Pi? Indeed, we could copy it to the Pi’s SD card <em>every</em> time we compile. If you’re just planning on running the demo without doing any tinkering, this is probably the easiest
+                    path for you. But this gets tedious when we need to iterate and debug. Instead, we’ll use the UART connection to send our kernel from our host machine to the Pi every time we boot. We load the SD card with a tiny bootloader kernel
+                    that listens on UART for the kernel to be sent down from our host machine. When it receives it, it moves itself out of the way, copies the new kernel in its place, and begins executing it. The Pi thinks it’s just executing a normal
+                    kernel loaded from the SD card.</p>
+                <p>There’s a few serial bootloader projects out there, but the only one I had success with was one by the name of <a href="https://github.com/robey/c3r3s" target="_blank" rel="noopener">c3r3s</a>. It supports 64 bit kernels and the Raspberry
+                    Pi 3.</p>
+                <p>Iterating on the kernel goes something like this:</p>
+                <ol>
+                    <li>Re-compile the kernel (see below)</li>
+                    <li>Reboot the Pi and wait for a blank screen</li>
+                    <li>Launch c3r3s with the path to our kernel</li>
+                </ol>
+                <p>To compile the kerenel, type make inside the <code>src/lesson01</code> directory (or whichever lesson / project you wish to build). If successful, the kernel will appear in the same directory named <code>kernel8.img</code>. This is what
+                    you’d normally copy to your SD card.</p>
+                <h2 id="Testing-Our-Setup">
+                    <a href="#Testing-Our-Setup" class="headerlink" title="Testing Our Setup"></a>Testing Our Setup</h2>
+                <p>At this point, you should be able to compile lesson01 of the raspberry-pi-os kernel. We’ll use the <code>fling</code> command from the c3r3s project to send it to the Pi.</p>
+                <p>First, follow c3r3s’ <a href="https://github.com/robey/c3r3s#how-to-use" target="_blank" rel="noopener">installation instructions</a> to get the “loader” kernel on the Pi. Then power on the Pi and wait a few moments for a blank screen.
+                    To send our kernel to the Pi, we’ll run the following command. The <code>screen</code> command is run immediately after to capture the serial output from the Pi:</p>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="code"><pre><span class="line">$ fling -v /dev/cu.SLAB_USBtoUART path/to/kernel8.img &amp;&amp; screen /dev/cu.SLAB_USBtoUART 115200</span><br></pre></td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>Remember to replace the paths in the command to your kernel and your USBtoUART mount point.</p>
+                <p>If you see <code>hello world</code> printed to your terminal afterwards, congrats! You’ve just writen your first Raspberry Pi kernel. From here, continue on to <a href="/2019/05/21/Exploring-Hardware-Compositing-With-the-Raspberry-Pi/"
+                        title="Exploring Hardware Compositing With the Raspberry Pi">Exploring Hardware Compositing With the Raspberry Pi</a> and we’ll get some pretty shapes on the monitor in no time.</p>
+
+            </div>
+        </article>
+
+        <div class="blog-post-comments">
+            <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div id="footer-post-container">
+        <div id="footer-post">
+
+            <div id="nav-footer" style="display: none">
+                <ul>
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="https://benjdoherty.com/about">About</a></li>
+
+                    <li><a href="/archives/">Writing</a></li>
+
+                    <li><a href="https://benjdoherty.com/">Projects</a></li>
+
+                </ul>
+            </div>
+
+            <div id="toc-footer" style="display: none">
+                <ol class="toc">
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Host-Machine"><span class="toc-number">1.</span> <span class="toc-text">Host Machine</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#The-Raspberry-Pi"><span class="toc-number">2.</span> <span class="toc-text">The Raspberry Pi</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Toolchain"><span class="toc-number">3.</span> <span class="toc-text">Toolchain</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Base-Code-Raspberry-Pi-OS"><span class="toc-number">4.</span> <span class="toc-text">Base Code - Raspberry Pi OS</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Serial-Bootloader-amp-Compiling"><span class="toc-number">5.</span> <span class="toc-text">Serial Bootloader &amp; Compiling</span></a></li>
+                    <li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-Our-Setup"><span class="toc-number">6.</span> <span class="toc-text">Testing Our Setup</span></a></li>
+                </ol>
+            </div>
+
+            <div id="share-footer" style="display: none">
+                <ul>
+                    <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&text=Getting Started With the Raspberry Pi"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&is_video=false&description=Getting Started With the Raspberry Pi"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="mailto:?subject=Getting Started With the Raspberry Pi&body=Check out this article: http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&title=Getting Started With the Raspberry Pi"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+                    <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/21/Getting-Started-With-the-Raspberry-Pi/&name=Getting Started With the Raspberry Pi&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+                </ul>
+
+            </div>
+
+            <div id="actions-footer">
+                <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+                <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+                <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+                <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        <div class="footer-left">
+            Copyright &copy; 2019 TimmyCoder
+        </div>
+        <div class="footer-right">
+            <nav>
+                <ul>
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="https://benjdoherty.com/about">About</a></li>
+
+                    <li><a href="/archives/">Writing</a></li>
+
+                    <li><a href="https://benjdoherty.com/">Projects</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<script type="text/javascript">
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-119516427-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'blog-benjdoherty';
+
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>

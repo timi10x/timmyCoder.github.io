@@ -256,7 +256,7 @@ header img {
     -ms-flex-align: center;
     align-items: center;
     background-color: #333;
-    border-radius: 40px;
+    border-radius: 30px;
     height: 80px;
     width: 80px;
     -webkit-transition: all 0.3s ease;
@@ -267,12 +267,12 @@ header img {
 }
 
 .my-nav a {
-    margin: 0 40px;
+    margin: 0 25px;
     color: #fff
 }
 
 .my-nav a:first-child {
-    margin-left: 120px
+    margin-left: 100px
 }
 
 .my-nav:hover {
@@ -444,6 +444,10 @@ header img {
 
 .inayam #git {
     color: #333
+}
+
+.inayam #med {
+    color: rgb(62, 220, 138)
 }
 
 .inayam #so {
