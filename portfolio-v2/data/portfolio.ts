@@ -1,33 +1,63 @@
 export const projects = [
   {
     id: 1,
-    title: "Chaka",
-    role: "Lead Mobile Engineer",
-    description: "Built a commission-free stock trading platform that democratized investing for African millennials. Led the mobile engineering team to deliver a seamless trading experience.",
-    impact: "100K+ Active Users",
-    tech: ["Kotlin", "SwiftUI", "MVVM", "Coroutines", "Combine"],
-    year: "2021-2023",
-    category: "Fintech"
+    title: "Footlocker",
+    role: "Senior Software Engineer",
+    description: "Leading the redesign and rewrite of Foot Locker, Champs Sports, and Kids Foot Locker mobile applications. Optimized CI/CD pipeline to reduce PR build check time by 83%.",
+    impact: "Millions of Users",
+    tech: ["Kotlin", "Android", "CI/CD", "Gradle", "Geolocation"],
+    year: "2025-Present",
+    category: "Retail Tech"
   },
   {
     id: 2,
-    title: "Expanse Technology",
-    role: "Senior Mobile Engineer",
-    description: "Developed enterprise financial management solutions for businesses across Africa. Implemented complex payment flows and real-time transaction monitoring.",
-    impact: "$50M+ Processed",
-    tech: ["Flutter", "Dart", "BLoC", "Firebase"],
-    year: "2023-Present",
-    category: "Enterprise"
+    title: "Grey Finance",
+    role: "Lead Software Engineer",
+    description: "Scaled a global money transfer platform serving 2M+ users across multiple countries. Introduced server-driven UI for efficiency and led team growth.",
+    impact: "2M+ Users",
+    tech: ["Kotlin", "KMM", "Ktor", "Server-Driven UI", "Python", "Go"],
+    year: "2022-2025",
+    category: "Fintech"
   },
   {
     id: 3,
-    title: "Crop2Cash",
-    role: "Mobile Engineer",
-    description: "Created a mobile lending platform for farmers, enabling access to credit using future harvest as collateral. Pioneered offline-first architecture for rural connectivity.",
-    impact: "20K+ Loans Disbursed",
-    tech: ["React Native", "Redux", "SQLite", "Offline-first"],
-    year: "2020-2021",
+    title: "Fidelity Investments",
+    role: "Senior Software Engineer",
+    description: "Built custom Gradle tasks for feature modules, raised test coverage by 67.8%, and achieved platform parity using Kotlin Multiplatform Mobile.",
+    impact: "67.8% Test Coverage",
+    tech: ["Kotlin", "KMM", "Gradle", "Maestro", "Predictive Analytics"],
+    year: "2023-2024",
     category: "Fintech"
+  },
+  {
+    id: 4,
+    title: "Chaka",
+    role: "Software Engineer",
+    description: "Handled maintenance and shipping of new features for investment app. Increased user retention by 30% through performance optimization and crash-free sessions.",
+    impact: "30% Retention Boost",
+    tech: ["Kotlin", "Custom Views", "Play Store", "Analytics"],
+    year: "2021-2022",
+    category: "Fintech"
+  },
+  {
+    id: 5,
+    title: "Bloom",
+    role: "Mobile Engineer",
+    description: "Built a comprehensive savings and investment app that allows users to save and invest money with smart financial tools.",
+    impact: "Play Store Featured",
+    tech: ["Android", "Kotlin", "Jetpack Compose", "Firebase"],
+    year: "2022",
+    category: "Fintech"
+  },
+  {
+    id: 6,
+    title: "Ivy Wallet",
+    role: "Open Source Contributor",
+    description: "Contributing to a budget app using Jetpack Compose that helps users manage personal finances. Active open source contributor to the project.",
+    impact: "GitHub Top Project",
+    tech: ["Jetpack Compose", "Kotlin", "Clean Architecture", "Material 3"],
+    year: "2021",
+    category: "Open Source"
   }
 ]
 
@@ -114,9 +144,11 @@ export const philosophy = [
 ]
 
 export const contact = {
-  email: "timi@example.com",
-  linkedin: "https://linkedin.com/in/timi10x",
+  email: "olatoyedan@gmail.com",
+  phone: "+1(970)-413-9607",
+  location: "Dallas TX, USA",
+  linkedin: "https://www.linkedin.com/in/timilehin-olatoye/",
   github: "https://github.com/timmyCoder",
-  twitter: "https://twitter.com/timi10x",
-  medium: "https://medium.com/@timi10x"
+  twitter: "https://twitter.com/timmyCoder",
+  medium: "https://medium.com/@olatoyedaniel"
 }

@@ -4,20 +4,7 @@ import { motion } from 'framer-motion'
 
 export default function BlueprintHero() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-primaryblue relative overflow-hidden">
-      {/* Grid Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(white 1px, transparent 1px),
-              linear-gradient(90deg, white 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px',
-          }}
-        />
-      </div>
+    <section className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden bg-gradient-to-br from-primaryblue via-[#1a2eb5] to-[#162891]">
 
       {/* Blueprint Title Block */}
       <div className="absolute top-8 right-8 border-2 border-white p-6 bg-primaryblue/50 backdrop-blur-sm">

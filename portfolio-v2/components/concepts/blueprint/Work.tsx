@@ -5,20 +5,7 @@ import { projects } from '@/data/portfolio'
 
 export default function BlueprintWork() {
   return (
-    <section id="work" className="py-20 px-6 bg-white relative">
-      {/* Grid Background */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(#243DE8 1px, transparent 1px),
-              linear-gradient(90deg, #243DE8 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px',
-          }}
-        />
-      </div>
+    <section id="work" className="py-20 px-6 relative bg-gradient-to-br from-primaryivory via-[#fef9f0] to-[#f0ebe0]">
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div

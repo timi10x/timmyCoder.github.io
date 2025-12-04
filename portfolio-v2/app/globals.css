@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animated gradient background */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 6s ease infinite;
+}
+
+.bg-300\% {
+  background-size: 300% 300%;
+}
+
 /* Import Instrument Sans from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 

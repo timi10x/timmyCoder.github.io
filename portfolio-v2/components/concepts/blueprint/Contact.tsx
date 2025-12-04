@@ -5,20 +5,7 @@ import { contact } from '@/data/portfolio'
 
 export default function BlueprintContact() {
   return (
-    <section id="contact" className="py-20 px-6 bg-primaryblue relative overflow-hidden">
-      {/* Grid Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(white 1px, transparent 1px),
-              linear-gradient(90deg, white 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px',
-          }}
-        />
-      </div>
+    <section id="contact" className="py-20 px-6 relative overflow-hidden bg-gradient-to-br from-[#162891] via-primaryblue to-[#2d4ef5]">
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div

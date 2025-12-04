@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import ConsoleEasterEgg from '@/components/shared/ConsoleEasterEgg'
 
 export const metadata: Metadata = {
-  title: 'timi10x | Mobile Engineer',
-  description: 'Mobile Engineer building financial products people trust',
-  keywords: ['Mobile Engineer', 'Android', 'iOS', 'Kotlin', 'SwiftUI', 'Fintech', 'Portfolio'],
-  authors: [{ name: 'timi10x' }],
+  title: 'timi10x | Software Engineer',
+  description: 'Software engineer with over a decade of experience in building and scaling technologies. Currently at Footlocker, previously built fintech products serving 2M+ users. Let\'s build something amazing together.',
+  keywords: ['Software Engineer', 'Android', 'Kotlin', 'KMM', 'Jetpack Compose', 'Fintech', 'Mobile Development', 'Dallas'],
+  authors: [{ name: 'Timilehin Olatoye' }],
   openGraph: {
-    title: 'timi10x | Mobile Engineer',
-    description: 'Mobile Engineer building financial products people trust',
+    title: 'timi10x | Software Engineer',
+    description: 'Software engineer with over a decade of experience building and scaling technologies for millions of users.',
     type: 'website',
   },
 }
@@ -20,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ConsoleEasterEgg />
+        {children}
+      </body>
     </html>
   )
 }
