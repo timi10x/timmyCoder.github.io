@@ -12,7 +12,7 @@ export default function BlogWindow() {
           </div>
           <div className="flex-1 bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-600 flex items-center gap-2">
             <span>🔒</span>
-            <span>timmycoder.github.io/blog</span>
+            <span>timi10x.com/blog</span>
           </div>
           <button className="px-3 py-1.5 text-blue-600 hover:bg-gray-200 rounded text-sm">Refresh</button>
         </div>

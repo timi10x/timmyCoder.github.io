@@ -13,7 +13,7 @@ You need Node.js installed on your system.
 1. Open Terminal
 2. Navigate to the portfolio-v2 directory:
    ```bash
-   cd "/Users/timi10x/Desktop/my portfolio/timmyCoder.github.io/portfolio-v2"
+   cd "/Users/timi10x/Desktop/my portfolio/timi10x.com/portfolio-v2"
    ```
 
 3. Install dependencies:

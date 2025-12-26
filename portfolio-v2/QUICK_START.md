@@ -18,7 +18,7 @@ brew install node
 
 ### 2. Install Dependencies
 ```bash
-cd /Users/timi10x/Desktop/my\ portfolio/timmyCoder.github.io/portfolio-v2
+cd /Users/timi10x/Desktop/my\ portfolio/timi10x.com/portfolio-v2
 npm install
 ```
 
@@ -111,7 +111,7 @@ vercel
 
 ### 3. Set up Custom Domain
 ```bash
-vercel domains add timmycoder.me
+vercel domains add timi10x.com
 ```
 
 ## 🎨 Customization Options
