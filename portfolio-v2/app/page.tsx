@@ -1,7 +1,7 @@
 'use client'
 
-import PersonalPortfolio from '@/components/personal-portfolio/PersonalPortfolio'
+import Portfolio from '@/components/Portfolio'
 
 export default function Home() {
-  return <PersonalPortfolio />
+  return <Portfolio />
 }

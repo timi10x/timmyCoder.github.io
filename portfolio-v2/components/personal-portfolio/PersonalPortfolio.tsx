@@ -12,58 +12,139 @@ type Project = {
   image: string
   color: string
   tags: string[]
+  period?: string
+  details?: {
+    responsibilities: string[]
+    technologies: string[]
+  }
 }
 
 const projects: Project[] = [
   {
     id: 'footlocker',
     name: 'Footlocker',
-    role: 'Senior Software Engineer',
-    description: 'Leading redesign of Foot Locker, Champs Sports, and Kids Foot Locker apps. Reduced CI/CD build time by 83%.',
-    impact: 'Millions of users',
+    role: 'Software Engineer',
+    description: 'Leading Android technical development for 3 major retail apps.',
+    impact: '83% faster builds',
     image: '👟',
     color: 'from-slate-600 to-slate-800',
-    tags: ['Android', 'CI/CD', 'Kotlin']
+    tags: ['Android', 'CI/CD', 'Kotlin'],
+    period: 'Jun 2025 – Present',
+    details: {
+      responsibilities: [
+        'Serving as Android technical lead for redesign and rewrite of Foot Locker, Champs Sports, and Kids Foot Locker mobile applications',
+        'Optimized CI/CD pipeline to reduce PR build check time by 83%',
+        'Introduced development processes that decreased reopened tickets and improved code quality',
+        'Mentoring 3 developers through pair programming, code reviews, and weekly office hours',
+        'Creating knowledge-sharing presentations and documents to advance team knowledge',
+        'Improving UX with geolocation in-store experience and store mode feature'
+      ],
+      technologies: ['Kotlin', 'Android', 'CI/CD', 'Gradle', 'Geolocation', 'Jetpack Compose']
+    }
   },
   {
     id: 'grey',
     name: 'Grey Finance',
-    role: 'Lead Mobile Engineer',
-    description: 'Scaled global money transfer platform serving 2M+ users across multiple countries.',
+    role: 'Software Engineer',
+    description: 'Scaled fintech platform to 2M+ users globally.',
     impact: '2M+ users',
     image: '💳',
     color: 'from-blue-600 to-indigo-700',
-    tags: ['KMM', 'Ktor', 'Server-Driven UI']
+    tags: ['KMM', 'Python', 'Go'],
+    period: 'Jun 2024–Jun 2025 & Mar 2022–Dec 2023',
+    details: {
+      responsibilities: [
+        'Solved scaling issues and brought structure to the team',
+        'Introduced server-driven UI for efficiency and on-the-go development',
+        'Hired and grew the team with the best talent',
+        'Maintained development for global money transfer platform serving 2M+ users',
+        'Worked closely with service team, scaling services using Python and GoLang',
+        'Introduced Jetpack Compose resulting in 20% faster development and fewer bugs',
+        'Managed Ktor HTTP client to optimize network requests across platforms',
+        'Increased test coverage by 10% and wrote comprehensive unit tests'
+      ],
+      technologies: ['Kotlin', 'KMM', 'Ktor', 'Server-Driven UI', 'Python', 'Go', 'Jetpack Compose']
+    }
   },
   {
     id: 'fidelity',
     name: 'Fidelity Investments',
-    role: 'Senior Software Engineer',
-    description: 'Built Gradle modules, raised test coverage by 67.8%, achieved platform parity with KMM.',
+    role: 'Software Engineer',
+    description: 'Built KMM modules for iOS/Android parity. Raised test coverage by 67.8% using Maestro.',
     impact: '67.8% test coverage',
     image: '🏦',
     color: 'from-green-600 to-emerald-700',
-    tags: ['Gradle', 'KMM', 'Maestro']
+    tags: ['KMM', 'Testing', 'Gradle'],
+    period: 'Feb 2023 – Apr 2024',
+    details: {
+      responsibilities: [
+        'Wrote custom Gradle tasks to publish feature modules as Gradle libraries, utilized by 20+ engineers',
+        'Developed advanced algorithms for predictive analytics in fund management based on user spending habits',
+        'Raised test coverage by 67.8% and spearheaded UI automation keyflows using Maestro',
+        'Achieved feature parity between Android and iOS platforms using Kotlin Multiplatform Mobile'
+      ],
+      technologies: ['Kotlin', 'KMM', 'Gradle', 'Maestro', 'Predictive Analytics', 'Unit Testing']
+    }
   },
   {
-    id: 'bloom',
-    name: 'Bloom',
-    role: 'Mobile Engineer',
-    description: 'Built comprehensive savings and investment app with smart financial tools.',
-    impact: 'Play Store Featured',
-    image: '🌱',
+    id: 'pastel',
+    name: 'Pastel Africa',
+    role: 'Software Engineer',
+    description: 'Built reusable UI component system. Grew engineering team 50% and improved analytics by 30%.',
+    impact: '30% analytics boost',
+    image: '🎨',
     color: 'from-purple-600 to-pink-600',
-    tags: ['Compose', 'Firebase', 'Fintech']
+    tags: ['Android', 'Team Lead', 'Analytics'],
+    period: 'May 2022 – Nov 2022',
+    details: {
+      responsibilities: [
+        'Built and rolled out reusable custom UI components used internally by 4 engineers',
+        'Involved in hiring process for Android developers and grew team from 4 to 6 engineers',
+        'Collaborated with product team to plan roadmaps and gather functional requirements',
+        'Added analytics to track events and improve data collection by 30%'
+      ],
+      technologies: ['Android', 'Kotlin', 'Custom Views', 'Analytics', 'Team Leadership']
+    }
   },
   {
     id: 'chaka',
-    name: 'Chaka',
+    name: 'Chaka Technologies',
     role: 'Software Engineer',
-    description: 'Investment app allowing users to invest in 4,000+ stocks. Increased retention by 30%.',
+    description: 'Achieved 95% crash-free sessions for investment app. Increased user retention by 30%.',
     impact: '30% retention boost',
     image: '📈',
     color: 'from-orange-600 to-red-600',
-    tags: ['Custom Views', 'Performance', 'Analytics']
+    tags: ['Kotlin', 'Custom Views', 'Performance'],
+    period: 'Mar 2021 – Mar 2022',
+    details: {
+      responsibilities: [
+        'Handled maintenance and shipping of new features for Chaka investment app',
+        'Translated complex UI designs with micro-interactions using Custom Views',
+        'Increased user retention by 30% by maintaining crash-free sessions of 95%',
+        'Released apps to Play Store as release manager'
+      ],
+      technologies: ['Kotlin', 'Custom Views', 'Play Store', 'Analytics', 'Performance Optimization']
+    }
+  },
+  {
+    id: 'crop2cash',
+    name: 'Crop2cash',
+    role: 'Software Engineer',
+    description: 'Automated supply chain saving 35% costs. Reduced crashes by 50% through Kotlin migration.',
+    impact: '35% cost reduction',
+    image: '🌾',
+    color: 'from-green-600 to-lime-600',
+    tags: ['Kotlin', 'Python', 'Automation'],
+    period: 'Oct 2018 – Feb 2021',
+    details: {
+      responsibilities: [
+        'Automated supply chain process of agro-processors saving 35% of manual processing costs',
+        'Refactored 80% of Java files to Kotlin, resulting in 50% reduction in app crashes',
+        'Enhanced Android app with modern architecture for better maintainability and reusability',
+        'Contributed to backend team building and deploying microservices with Python'
+      ],
+      technologies: ['Android', 'Kotlin', 'Java', 'Python', 'Microservices', 'Architecture']
+    }
   }
 ]
 
@@ -71,6 +152,20 @@ export default function PersonalPortfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
   const [isHovering, setIsHovering] = useState(false)
+  
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedProject])
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -143,16 +238,6 @@ export default function PersonalPortfolio() {
           transition={{ duration: 0.8 }}
         >
           <div className="w-full max-w-6xl">
-            {/* Top corner accent */}
-            <motion.div
-              className="absolute top-4 left-4 md:top-8 md:left-8 text-[10px] md:text-xs text-gray-400 font-mono"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              2024 — PRESENT
-            </motion.div>
-
             <div className="text-center">
               {/* Main title - clean and bold */}
               <motion.h1
@@ -192,7 +277,7 @@ export default function PersonalPortfolio() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.7 }}
                     >
-                      500K+ downloads
+                      10M+ downloads
                     </motion.span>
                     <span className="text-gray-300">•</span>
                     <motion.span 
@@ -201,7 +286,7 @@ export default function PersonalPortfolio() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8 }}
                     >
-                      50% performance boost
+                      100% performance boost
                     </motion.span>
                   </div>
               </motion.div>
@@ -343,7 +428,7 @@ export default function PersonalPortfolio() {
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                         {/* Left side - Project info */}
                         <div className="flex-1">
-                          <div className="flex items-start gap-4 mb-4 md:mb-0">
+                          <div className="flex items-start gap-4">
                             {/* Number indicator */}
                             <motion.span 
                               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100"
@@ -363,26 +448,47 @@ export default function PersonalPortfolio() {
                               <p className="text-gray-500 text-xs sm:text-sm md:text-base max-w-xl">
                                 {project.description}
                               </p>
+                              
+                              {/* Impact & Tags - Mobile only, aligned with text */}
+                              <div className="mt-4 md:hidden">
+                                <p className="text-lg font-bold text-gray-900 mb-2">
+                                  {project.impact}
+                                </p>
+                                <div className="flex flex-wrap gap-1">
+                                  {project.tags.map(tag => (
+                                    <span 
+                                      key={tag} 
+                                      className={`px-2 py-0.5 text-[10px] font-medium transition-all duration-300 ${
+                                        hoveredProject === project.id
+                                          ? 'bg-black text-white' 
+                                          : 'bg-gray-100 text-gray-600'
+                                      }`}
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Right side - Impact & Tags */}
-                        <div className="flex flex-col md:items-end mt-4 md:mt-0">
+                        {/* Right side - Impact & Tags - Desktop only */}
+                        <div className="hidden md:flex flex-col items-end">
                           <motion.div
                             animate={{ 
                               x: hoveredProject === project.id ? -10 : 0 
                             }}
                             transition={{ duration: 0.3 }}
                           >
-                            <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                            <p className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                               {project.impact}
                             </p>
-                            <div className="flex flex-wrap gap-1 sm:gap-2 justify-start md:justify-end">
+                            <div className="flex flex-wrap gap-2 justify-end">
                               {project.tags.map(tag => (
                                 <span 
                                   key={tag} 
-                                  className={`px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium transition-all duration-300 ${
+                                  className={`px-3 py-1 text-xs font-medium transition-all duration-300 ${
                                     hoveredProject === project.id
                                       ? 'bg-black text-white' 
                                       : 'bg-gray-100 text-gray-600'
@@ -397,7 +503,7 @@ export default function PersonalPortfolio() {
                       </div>
 
                       {/* Hover indicator - Aligned with content */}
-                      <div className="flex items-start gap-4 mt-4">
+                      <div className="flex items-start gap-4 mt-3">
                         {/* Spacer to match number width */}
                         <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold invisible">
                           0{index + 1}
@@ -405,7 +511,7 @@ export default function PersonalPortfolio() {
                         
                         {/* Hover text aligned with project name */}
                         <motion.div
-                          className="flex items-center gap-2 text-sm"
+                          className="flex items-center gap-2 text-xs sm:text-sm"
                           initial={{ opacity: 0 }}
                           animate={{ 
                             opacity: hoveredProject === project.id ? 1 : 0,
@@ -462,11 +568,11 @@ export default function PersonalPortfolio() {
                 <div className="space-y-6">
                   <div className="group">
                     <div className="flex justify-between items-baseline mb-2">
-                      <span className="text-2xl font-bold text-gray-900">Android</span>
+                      <span className="text-2xl font-bold text-gray-900">Languages & Architecture</span>
                       <span className="text-xs text-gray-400 uppercase tracking-wider">10+ years</span>
                     </div>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Kotlin • Java • Jetpack Compose • Clean Architecture • MVVM • MVI
+                      Kotlin • Java • Swift • Go • Python • Clean Architecture • MVP • MVI • MVVM • MVC
                     </p>
                     <motion.div 
                       className="h-[1px] bg-gray-200 mt-4 origin-left"
@@ -483,7 +589,7 @@ export default function PersonalPortfolio() {
                       <span className="text-xs text-gray-400 uppercase tracking-wider">5+ years</span>
                     </div>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Kotlin Multiplatform • Compose Multiplatform • SwiftUI • Flutter
+                      Kotlin Multiplatform Mobile • Compose Multiplatform • Jetpack Compose • Ktor
                     </p>
                     <motion.div 
                       className="h-[1px] bg-gray-200 mt-4 origin-left"
@@ -496,11 +602,11 @@ export default function PersonalPortfolio() {
 
                   <div className="group">
                     <div className="flex justify-between items-baseline mb-2">
-                      <span className="text-2xl font-bold text-gray-900">Backend</span>
-                      <span className="text-xs text-gray-400 uppercase tracking-wider">4+ years</span>
+                      <span className="text-2xl font-bold text-gray-900">Data & Reactive</span>
+                      <span className="text-xs text-gray-400 uppercase tracking-wider">7+ years</span>
                     </div>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Python • Go • Ktor • Firebase • GraphQL • PostgreSQL
+                      Room • SQLDelight • Realm • MongoDB • Coroutines • Flow • RxJava2 • LiveData
                     </p>
                     <motion.div 
                       className="h-[1px] bg-gray-200 mt-4 origin-left"
@@ -525,16 +631,16 @@ export default function PersonalPortfolio() {
                 {/* Skill Categories as minimal lists */}
                 <div className="space-y-8">
                   <div>
-                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Testing</h4>
+                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Testing & CI/CD</h4>
                     <div className="flex flex-wrap gap-2">
-                      {['JUnit', 'Mockk', 'Espresso', 'UI Automator', 'Maestro'].map((skill, i) => (
+                      {['JUnit4', 'Mockk', 'Mockito', 'Espresso', 'A/B Testing', 'UI Automator', 'Maestro', 'GitHub Actions', 'Fastlane', 'Jenkins', 'GitLab CI/CD'].map((skill, i) => (
                         <motion.span
                           key={skill}
                           className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-200 hover:border-gray-400 transition-colors cursor-default"
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.4 + i * 0.05 }}
+                          transition={{ delay: 0.4 + i * 0.03 }}
                         >
                           {skill}
                         </motion.span>
@@ -543,16 +649,16 @@ export default function PersonalPortfolio() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">DevOps</h4>
+                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Networking & Analytics</h4>
                     <div className="flex flex-wrap gap-2">
-                      {['GitHub Actions', 'Fastlane', 'Jenkins', 'CI/CD', 'Gradle'].map((skill, i) => (
+                      {['RESTful', 'gRPC', 'GraphQL', 'Retrofit', 'Firebase Analytics', 'Amplitude', 'Segment', 'Braze', 'Adobe Analytics'].map((skill, i) => (
                         <motion.span
                           key={skill}
                           className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-200 hover:border-gray-400 transition-colors cursor-default"
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.5 + i * 0.05 }}
+                          transition={{ delay: 0.5 + i * 0.03 }}
                         >
                           {skill}
                         </motion.span>
@@ -561,16 +667,16 @@ export default function PersonalPortfolio() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Specialized</h4>
+                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Hardware & Services</h4>
                     <div className="flex flex-wrap gap-2">
-                      {['BLE', 'NFC', 'Camera APIs', 'ExoPlayer', 'Server-Driven UI', 'Performance'].map((skill, i) => (
+                      {['BLE', 'NFC', 'Camera', 'Location', 'OpenGL ES', 'ExoPlayer', 'FCM', 'Push Notifications', 'In-app Messaging'].map((skill, i) => (
                         <motion.span
                           key={skill}
                           className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-200 hover:border-gray-400 transition-colors cursor-default"
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.6 + i * 0.05 }}
+                          transition={{ delay: 0.6 + i * 0.03 }}
                         >
                           {skill}
                         </motion.span>
@@ -579,16 +685,16 @@ export default function PersonalPortfolio() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Libraries</h4>
+                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">DI & Processes</h4>
                     <div className="flex flex-wrap gap-2">
-                      {['Coroutines', 'Flow', 'Dagger Hilt', 'Room', 'Retrofit', 'SQLDelight'].map((skill, i) => (
+                      {['Dagger Hilt', 'Kodein', 'Koin', 'SCRUM', 'AGILE', 'SDLC', 'KANBAN', 'SOLID Principles'].map((skill, i) => (
                         <motion.span
                           key={skill}
                           className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-200 hover:border-gray-400 transition-colors cursor-default"
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.7 + i * 0.05 }}
+                          transition={{ delay: 0.7 + i * 0.03 }}
                         >
                           {skill}
                         </motion.span>
@@ -787,7 +893,7 @@ export default function PersonalPortfolio() {
               transition={{ delay: 0.5 }}
             >
               <p className="text-gray-500 text-sm">
-                © {new Date().getFullYear()} timi10x. Crafted with passion in Dallas.
+                © {new Date().getFullYear()} timi10x
               </p>
             </motion.div>
           </div>
@@ -822,7 +928,7 @@ export default function PersonalPortfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="max-w-3xl w-full relative max-h-[90vh] overflow-y-auto"
+              className="max-w-3xl w-full relative max-h-[90vh] overflow-y-auto scrollbar-hide"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Content */}
@@ -833,16 +939,95 @@ export default function PersonalPortfolio() {
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', duration: 0.5 }}
                 >
-                  {selectedProject.image}
+                  {selectedProject.id === 'grey' ? (
+                    <img 
+                      src="/img/greyLogo.svg" 
+                      alt="Grey Finance" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'footlocker' ? (
+                    <img 
+                      src="/img/FLLogo.png" 
+                      alt="Footlocker" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'fidelity' ? (
+                    <img 
+                      src="/img/fidelityLogo.png" 
+                      alt="Fidelity Investments" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'bloom' ? (
+                    <img 
+                      src="/img/fidelityBloom.webp" 
+                      alt="Bloom" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'pastel' ? (
+                    <img 
+                      src="/img/PastelLogo.webp" 
+                      alt="Pastel Africa" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'chaka' ? (
+                    <img 
+                      src="/img/chakaLogo.png" 
+                      alt="Chaka" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : selectedProject.id === 'crop2cash' ? (
+                    <img 
+                      src="/img/crop2cashLogo.png" 
+                      alt="Crop2cash" 
+                      className="w-[72px] sm:w-[84px] md:w-[96px] h-[72px] sm:h-[84px] md:h-[96px]"
+                    />
+                  ) : (
+                    <span>{selectedProject.image}</span>
+                  )}
                 </motion.div>
                 
                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">{selectedProject.name}</h3>
-                <p className="text-lg sm:text-xl text-gray-600 mb-6 md:mb-8">{selectedProject.role}</p>
+                <div className="flex items-center gap-4 mb-6 md:mb-8">
+                  <p className="text-lg sm:text-xl text-gray-600">{selectedProject.role}</p>
+                  {selectedProject.period && (
+                    <>
+                      <span className="text-gray-300">•</span>
+                      <p className="text-sm sm:text-base text-gray-500">{selectedProject.period}</p>
+                    </>
+                  )}
+                </div>
                 
                 <div className="prose prose-base sm:prose-lg max-w-none mb-8 md:mb-12">
-                  <p className="text-gray-700 leading-relaxed text-base sm:text-lg md:text-xl">
+                  <p className="text-gray-700 leading-relaxed text-base sm:text-lg md:text-xl mb-6">
                     {selectedProject.description}
                   </p>
+                  
+                  {selectedProject.details && (
+                    <>
+                      <div className="mb-8">
+                        <h4 className="text-sm sm:text-base font-semibold text-gray-900 uppercase tracking-wider mb-4">Key Responsibilities</h4>
+                        <ul className="space-y-2 sm:space-y-3">
+                          {selectedProject.details.responsibilities.map((resp, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <span className="text-gray-400 mr-3">•</span>
+                              <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{resp}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="mb-8">
+                        <h4 className="text-sm sm:text-base font-semibold text-gray-900 uppercase tracking-wider mb-4">Technologies</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProject.details.technologies.map(tech => (
+                            <span key={tech} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-6 md:py-8 border-t border-b border-gray-200">

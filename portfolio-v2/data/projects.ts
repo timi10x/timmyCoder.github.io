@@ -86,7 +86,12 @@ export const projects: Project[] = [
     },
     appImages: [
       '/img/AppImages/FidelityBloomAppImage/FDBloom1.png',
-      '/img/AppImages/FidelityBloomAppImage/FDBloom2.png'
+      '/img/AppImages/FidelityBloomAppImage/FDBloom2.png',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom3.jpg',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom4.jpg',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom5.jpg',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom6.jpg',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom7.jpg'
     ]
   },
   {
