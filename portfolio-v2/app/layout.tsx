@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import ConsoleEasterEgg from '@/components/shared/ConsoleEasterEgg'
 
 export const metadata: Metadata = {
   title: 'timi10x | Software Engineer',
@@ -22,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ConsoleEasterEgg />
         {children}
       </body>
     </html>
