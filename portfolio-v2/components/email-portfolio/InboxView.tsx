@@ -82,7 +82,7 @@ Timi`,
 Open source is where I give back to the community that taught me everything. Here's what I'm working on:
 
 🐱 **ComposeKitten** - Modern Android with Jetpack Compose
-github.com/timmyCoder/ComposeKitten
+github.com/timi10x/ComposeKitten
 • Beautiful pet adoption app with Material 3 design
 • Showcases animation APIs and state management
 • Used as reference by 500+ developers learning Compose
@@ -111,7 +111,7 @@ github.com/timmyCoder/ComposeKitten
 Why open source matters to me:
 "Every line of code I write today stands on the shoulders of thousands of developers who shared their knowledge freely. Open source isn't just about code—it's about building a more inclusive tech ecosystem where everyone can learn and contribute."
 
-Check out my GitHub for more: github.com/timmyCoder
+Check out my GitHub for more: github.com/timi10x
 
 Happy coding!
 Timi`,

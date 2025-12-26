@@ -33,7 +33,7 @@ export default function Footer() {
             <h3 className="text-2xl font-medium text-white mb-8">Connect</h3>
             <div className="flex flex-col gap-4">
               <a
-                href="https://twitter.com/timmyCoder"
+                href="https://twitter.com/timi10x"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors"
@@ -41,7 +41,7 @@ export default function Footer() {
                 X.com →
               </a>
               <a
-                href="https://www.linkedin.com/in/daniel-olatoye/"
+                href="https://www.linkedin.com/in/timi-o/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors"
@@ -49,7 +49,7 @@ export default function Footer() {
                 LinkedIn →
               </a>
               <a
-                href="https://github.com/timmyCoder"
+                href="https://github.com/timi10x"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors"
@@ -57,7 +57,7 @@ export default function Footer() {
                 GitHub →
               </a>
               <a
-                href="https://medium.com/@olatoyedaniel"
+                href="https://medium.com/@timmy10x"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors"

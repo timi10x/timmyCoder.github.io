@@ -65,7 +65,7 @@ export default function MagazineContact() {
                 rel="noopener noreferrer"
                 className="text-2xl font-light text-black hover:text-primaryblue transition-colors"
               >
-                linkedin.com/in/timi10x
+                linkedin.com/in/timi-o
               </a>
             </div>
 
@@ -80,7 +80,7 @@ export default function MagazineContact() {
                 rel="noopener noreferrer"
                 className="text-2xl font-light text-black hover:text-primaryblue transition-colors"
               >
-                github.com/timmyCoder
+                github.com/timi10x
               </a>
             </div>
 

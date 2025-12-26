@@ -5,10 +5,10 @@ import { infoPlaceHolder } from '@/data/skills'
 
 export default function Footer() {
   const socialLinks = [
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/timilehin-olatoye/' },
-    { name: 'GitHub', url: 'https://github.com/timmyCoder' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/timi-o/' },
+    { name: 'GitHub', url: 'https://github.com/timi10x' },
     { name: 'Twitter', url: 'https://twitter.com/timi10x' },
-    { name: 'Medium', url: 'https://medium.com/@olatoyedaniel' },
+    { name: 'Medium', url: 'https://medium.com/@timmy10x' },
   ]
 
   return (

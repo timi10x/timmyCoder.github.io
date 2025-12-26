@@ -41,10 +41,10 @@ export const contactInfo = {
   email: 'olatoyedan@gmail.com',
   phone: '+1(970)-413-9607',
   location: 'Dallas TX, USA',
-  linkedin: 'https://www.linkedin.com/in/timilehin-olatoye/',
-  github: 'https://github.com/timmyCoder',
+  linkedin: 'https://www.linkedin.com/in/timi-o/',
+  github: 'https://github.com/timi10x',
   twitter: 'https://twitter.com/timi10x',
-  medium: 'https://medium.com/@olatoyedaniel'
+  medium: 'https://medium.com/@timmy10x'
 }
 
 export const infoPlaceHolder = {

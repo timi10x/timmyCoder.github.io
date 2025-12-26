@@ -8,10 +8,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 const contacts = [
   { label: 'Email', value: 'olatoyedan@gmail.com', link: 'mailto:olatoyedan@gmail.com' },
-  { label: 'LinkedIn', value: 'timi10x', link: 'https://www.linkedin.com/in/daniel-olatoye/' },
-  { label: 'GitHub', value: '@timmyCoder', link: 'https://github.com/timmyCoder' },
-  { label: 'Twitter', value: '@timmyCoder', link: 'https://twitter.com/timmyCoder' },
-  { label: 'Medium', value: '@olatoyedaniel', link: 'https://medium.com/@olatoyedaniel' },
+  { label: 'LinkedIn', value: 'timi-o', link: 'https://www.linkedin.com/in/timi-o/' },
+  { label: 'GitHub', value: '@timi10x', link: 'https://github.com/timi10x' },
+  { label: 'Twitter', value: '@timi10x', link: 'https://twitter.com/timi10x' },
+  { label: 'Medium', value: '@timmy10x', link: 'https://medium.com/@timmy10x' },
 ]
 
 export default function Contact() {

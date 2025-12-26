@@ -57,7 +57,7 @@ export default function TerminalContact() {
                     rel="noopener noreferrer"
                     className="block text-primaryblue hover:underline"
                   >
-                    💼 linkedin.com/in/timi10x
+                    💼 linkedin.com/in/timi-o
                   </a>
                   <a
                     href={contact.github}
@@ -65,7 +65,7 @@ export default function TerminalContact() {
                     rel="noopener noreferrer"
                     className="block text-primaryblue hover:underline"
                   >
-                    💻 github.com/timmyCoder
+                    💻 github.com/timi10x
                   </a>
                   <a
                     href={contact.twitter}

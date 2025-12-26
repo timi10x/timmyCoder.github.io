@@ -193,7 +193,7 @@ export default function MarsPortfolio() {
                   </div>
                 ))}
                 <a
-                  href="https://medium.com/@olatoyedaniel"
+                  href="https://medium.com/@timmy10x"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded text-center"

@@ -211,7 +211,7 @@ export default function MacOSPortfolio() {
                       </div>
                     </a>
                     <a
-                      href="https://github.com/timmyCoder"
+                      href="https://github.com/timi10x"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors"
@@ -223,7 +223,7 @@ export default function MacOSPortfolio() {
                       </div>
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/daniel-olatoye/"
+                      href="https://www.linkedin.com/in/timi-o/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors"
@@ -235,7 +235,7 @@ export default function MacOSPortfolio() {
                       </div>
                     </a>
                     <a
-                      href="https://twitter.com/timmyCoder"
+                      href="https://twitter.com/timi10x"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors"

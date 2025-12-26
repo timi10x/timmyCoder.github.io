@@ -78,12 +78,12 @@ export default function BlogWindow() {
           <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-gray-700 mb-2">Read more articles on my blog:</p>
             <a
-              href="https://medium.com/@olatoyedaniel"
+              href="https://medium.com/@timmy10x"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline font-semibold"
             >
-              medium.com/@olatoyedaniel →
+              medium.com/@timmy10x →
             </a>
           </div>
         </div>

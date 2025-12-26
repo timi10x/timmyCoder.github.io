@@ -5,14 +5,14 @@ const projects = [
     title: 'Memorize Game App',
     description: 'A SwiftUI game app that randomizes emojis and have you play to match all emojis',
     tech: ['SwiftUI', 'iOS'],
-    link: 'https://github.com/timmyCoder/MemorizeGameApp',
+    link: 'https://github.com/timi10x/MemorizeGameApp',
     color: 'from-orange-500 to-red-500',
   },
   {
     title: 'ComposeKitten',
     description: 'A pet adoption app built with Jetpack Compose, showcasing modern Android UI development',
     tech: ['Jetpack Compose', 'Kotlin', 'Material Design'],
-    link: 'https://github.com/timmyCoder/ComposeKitten',
+    link: 'https://github.com/timi10x/ComposeKitten',
     color: 'from-blue-500 to-purple-500',
   },
   {
@@ -26,14 +26,14 @@ const projects = [
     title: 'CRUD Back-End Project',
     description: 'Simple CRUD API using Ktor, Docker and PostgreSQL, deployed to Heroku',
     tech: ['Ktor', 'Docker', 'PostgreSQL'],
-    link: 'https://twitter.com/timmyCoder/status/1323030202906234886?s=20',
+    link: 'https://twitter.com/timi10x/status/1323030202906234886?s=20',
     color: 'from-purple-500 to-pink-500',
   },
   {
     title: 'Currency Converter App',
     description: 'Currency converter using fixer.io API with beautiful custom UI design',
     tech: ['Android', 'Retrofit', 'Custom UI'],
-    link: 'https://github.com/timmyCoder/CurrencyConverter',
+    link: 'https://github.com/timi10x/CurrencyConverter',
     color: 'from-yellow-500 to-orange-500',
   },
   {
@@ -95,7 +95,7 @@ export default function Projects() {
 
         <div className="text-center">
           <a
-            href="https://github.com/timmyCoder?tab=repositories"
+            href="https://github.com/timi10x?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-primary hover:bg-purple-600 transition-all rounded-full text-white font-semibold shadow-lg shadow-primary/50 hover:shadow-primary/80"

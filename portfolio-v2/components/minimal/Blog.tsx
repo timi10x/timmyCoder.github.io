@@ -10,17 +10,17 @@ const posts = [
   {
     title: 'Building Scalable Android Apps with Clean Architecture',
     date: '2024',
-    link: 'https://medium.com/@olatoyedaniel',
+    link: 'https://medium.com/@timmy10x',
   },
   {
     title: 'Jetpack Compose: The Future of Android UI',
     date: '2024',
-    link: 'https://medium.com/@olatoyedaniel',
+    link: 'https://medium.com/@timmy10x',
   },
   {
     title: 'Testing Strategies for Mobile Apps',
     date: '2023',
-    link: 'https://medium.com/@olatoyedaniel',
+    link: 'https://medium.com/@timmy10x',
   },
 ]
 
@@ -97,7 +97,7 @@ export default function Blog() {
         {/* View all link */}
         <div className="mt-16">
           <a
-            href="https://medium.com/@olatoyedaniel"
+            href="https://medium.com/@timmy10x"
             target="_blank"
             rel="noopener noreferrer"
             className="text-base text-neutral-600 hover:text-neutral-900 transition-colors"

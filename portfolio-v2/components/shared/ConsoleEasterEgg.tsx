@@ -72,7 +72,7 @@ export default function ConsoleEasterEgg() {
       'font-size: 18px; font-weight: bold; color: #243DE8;'
     )
     console.log(
-      '%cEmail: olatoyedan@gmail.com\nGitHub: github.com/timmyCoder\nLinkedIn: linkedin.com/in/timi-olatoye',
+      '%cEmail: olatoyedan@gmail.com\nGitHub: github.com/timi10x\nLinkedIn: linkedin.com/in/timi-o',
       'font-size: 14px; color: #666;'
     )
 

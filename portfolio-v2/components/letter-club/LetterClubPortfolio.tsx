@@ -181,12 +181,12 @@ export default function LetterClubPortfolio() {
                   <li>1. Click any illustration to learn more about that area</li>
                   <li>2. Compose your message below to get in touch</li>
                   <li>3. Check out my work on{' '}
-                    <a href="https://github.com/timmyCoder" className="underline" style={{ color: '#4444FF' }}>
+                    <a href="https://github.com/timi10x" className="underline" style={{ color: '#4444FF' }}>
                       GitHub
                     </a>
                   </li>
                   <li>4. Connect on{' '}
-                    <a href="https://linkedin.com/in/timi-olatoye" className="underline" style={{ color: '#4444FF' }}>
+                    <a href="https://linkedin.com/in/timi-o" className="underline" style={{ color: '#4444FF' }}>
                       LinkedIn
                     </a>
                   </li>
@@ -263,9 +263,9 @@ export default function LetterClubPortfolio() {
       <footer className="mt-16 pb-8 text-center text-sm text-gray-500">
         <p>© 2025 Timilehin Olatoye. Built with ❤️ and lots of ☕</p>
         <div className="flex justify-center gap-4 mt-2">
-          <a href="https://github.com/timmyCoder" className="hover:text-gray-700">GitHub</a>
-          <a href="https://twitter.com/timmyCoder" className="hover:text-gray-700">Twitter</a>
-          <a href="https://medium.com/@olatoyedaniel" className="hover:text-gray-700">Medium</a>
+          <a href="https://github.com/timi10x" className="hover:text-gray-700">GitHub</a>
+          <a href="https://twitter.com/timi10x" className="hover:text-gray-700">Twitter</a>
+          <a href="https://medium.com/@timmy10x" className="hover:text-gray-700">Medium</a>
         </div>
       </footer>
     </div>

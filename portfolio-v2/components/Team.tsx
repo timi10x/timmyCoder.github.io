@@ -83,7 +83,7 @@ export default function Team() {
             {/* Social Links */}
             <div className="flex gap-6 pt-4">
               <a
-                href="https://twitter.com/timmyCoder"
+                href="https://twitter.com/timi10x"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
@@ -91,7 +91,7 @@ export default function Team() {
                 X.com →
               </a>
               <a
-                href="https://www.linkedin.com/in/daniel-olatoye/"
+                href="https://www.linkedin.com/in/timi-o/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
@@ -99,7 +99,7 @@ export default function Team() {
                 LinkedIn →
               </a>
               <a
-                href="https://github.com/timmyCoder"
+                href="https://github.com/timi10x"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"

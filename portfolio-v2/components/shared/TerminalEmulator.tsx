@@ -79,8 +79,8 @@ export default function TerminalEmulator({ onCommandCount }: TerminalEmulatorPro
     ],
     contact: () => [
       'Email:    timi@example.com',
-      'LinkedIn: linkedin.com/in/timi10x',
-      'GitHub:   github.com/timmyCoder',
+      'LinkedIn: linkedin.com/in/timi-o',
+      'GitHub:   github.com/timi10x',
       'Twitter:  @timi10x',
     ],
     resume: () => 'Opening resume... (https://timi10x.com/resume.pdf)',

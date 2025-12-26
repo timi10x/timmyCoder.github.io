@@ -10,22 +10,22 @@ const essays = [
   {
     title: "Building Financial Trust Through Mobile",
     date: "January 9, 2025",
-    link: "https://medium.com/@olatoyedaniel"
+    link: "https://medium.com/@timmy10x"
   },
   {
     title: "The Future of Fintech in Africa",
     date: "August 18, 2024",
-    link: "https://medium.com/@olatoyedaniel"
+    link: "https://medium.com/@timmy10x"
   },
   {
     title: "Why Clean Architecture Matters in Fintech",
     date: "August 18, 2024",
-    link: "https://medium.com/@olatoyedaniel"
+    link: "https://medium.com/@timmy10x"
   },
   {
     title: "Mobile-First Financial Products",
     date: "July 5, 2024",
-    link: "https://medium.com/@olatoyedaniel"
+    link: "https://medium.com/@timmy10x"
   }
 ]
 

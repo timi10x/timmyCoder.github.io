@@ -96,7 +96,7 @@ export default function ThemedContact({ primary, secondary, accent }: ContactPro
               <div className="text-3xl mb-2">💼</div>
               <div className="text-sm font-mono mb-1" style={{ color: `${secondary}99` }}>PROFESSIONAL NETWORK</div>
               <div className="font-mono text-sm group-hover:underline" style={{ color: secondary }}>
-                linkedin.com/in/timi10x →
+                linkedin.com/in/timi-o →
               </div>
             </a>
 
@@ -117,7 +117,7 @@ export default function ThemedContact({ primary, secondary, accent }: ContactPro
               <div className="text-3xl mb-2">💻</div>
               <div className="text-sm font-mono mb-1" style={{ color: `${secondary}99` }}>CODE REPOSITORY</div>
               <div className="font-mono text-sm group-hover:underline" style={{ color: secondary }}>
-                github.com/timmyCoder →
+                github.com/timi10x →
               </div>
             </a>
 

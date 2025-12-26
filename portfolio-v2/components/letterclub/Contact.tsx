@@ -2,10 +2,10 @@
 
 const contacts = [
   { label: 'Email', value: 'olatoyedan@gmail.com', link: 'mailto:olatoyedan@gmail.com', icon: '📧' },
-  { label: 'LinkedIn', value: 'daniel-olatoye', link: 'https://www.linkedin.com/in/daniel-olatoye/', icon: '💼' },
-  { label: 'GitHub', value: 'timmyCoder', link: 'https://github.com/timmyCoder', icon: '💻' },
-  { label: 'Twitter', value: '@timmyCoder', link: 'https://twitter.com/timmyCoder', icon: '🐦' },
-  { label: 'Medium', value: '@olatoyedaniel', link: 'https://medium.com/@olatoyedaniel', icon: '📝' },
+  { label: 'LinkedIn', value: 'timi-o', link: 'https://www.linkedin.com/in/timi-o/', icon: '💼' },
+  { label: 'GitHub', value: 'timi10x', link: 'https://github.com/timi10x', icon: '💻' },
+  { label: 'Twitter', value: '@timi10x', link: 'https://twitter.com/timi10x', icon: '🐦' },
+  { label: 'Medium', value: '@timmy10x', link: 'https://medium.com/@timmy10x', icon: '📝' },
 ]
 
 export default function Contact() {

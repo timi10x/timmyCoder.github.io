@@ -407,13 +407,13 @@ export default function DeveloperJournal() {
                 <a href="mailto:olatoyedan@gmail.com" className="flex items-center gap-2 hover:text-blue-300">
                   <span>📧</span> olatoyedan@gmail.com
                 </a>
-                <a href="https://github.com/timmyCoder" className="flex items-center gap-2 hover:text-blue-300">
+                <a href="https://github.com/timi10x" className="flex items-center gap-2 hover:text-blue-300">
                   <span>💻</span> GitHub
                 </a>
-                <a href="https://linkedin.com/in/timi-olatoye" className="flex items-center gap-2 hover:text-blue-300">
+                <a href="https://linkedin.com/in/timi-o" className="flex items-center gap-2 hover:text-blue-300">
                   <span>💼</span> LinkedIn
                 </a>
-                <a href="https://twitter.com/timmyCoder" className="flex items-center gap-2 hover:text-blue-300">
+                <a href="https://twitter.com/timi10x" className="flex items-center gap-2 hover:text-blue-300">
                   <span>🐦</span> Twitter
                 </a>
               </div>

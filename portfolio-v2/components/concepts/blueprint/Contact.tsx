@@ -76,7 +76,7 @@ export default function BlueprintContact() {
               <div className="text-3xl mb-2">💼</div>
               <div className="text-sm font-mono text-white/60 mb-1">PROFESSIONAL NETWORK</div>
               <div className="text-white font-mono text-sm group-hover:underline">
-                linkedin.com/in/timi10x →
+                linkedin.com/in/timi-o →
               </div>
             </a>
 
@@ -93,7 +93,7 @@ export default function BlueprintContact() {
               <div className="text-3xl mb-2">💻</div>
               <div className="text-sm font-mono text-white/60 mb-1">CODE REPOSITORY</div>
               <div className="text-white font-mono text-sm group-hover:underline">
-                github.com/timmyCoder →
+                github.com/timi10x →
               </div>
             </a>
 

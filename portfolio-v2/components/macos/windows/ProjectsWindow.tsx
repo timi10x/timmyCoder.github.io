@@ -7,7 +7,7 @@ const projects = [
     icon: '🎮',
     description: 'A SwiftUI game app with emoji matching',
     tech: 'SwiftUI, iOS',
-    link: 'https://github.com/timmyCoder/MemorizeGameApp',
+    link: 'https://github.com/timi10x/MemorizeGameApp',
   },
   {
     name: 'ComposeKitten',
@@ -15,7 +15,7 @@ const projects = [
     icon: '🐱',
     description: 'Pet adoption app with Jetpack Compose',
     tech: 'Jetpack Compose, Kotlin',
-    link: 'https://github.com/timmyCoder/ComposeKitten',
+    link: 'https://github.com/timi10x/ComposeKitten',
   },
   {
     name: 'Visis',
@@ -31,7 +31,7 @@ const projects = [
     icon: '💱',
     description: 'Real-time currency conversion',
     tech: 'Android, Retrofit, Custom UI',
-    link: 'https://github.com/timmyCoder/CurrencyConverter',
+    link: 'https://github.com/timi10x/CurrencyConverter',
   },
   {
     name: 'Paddybase',

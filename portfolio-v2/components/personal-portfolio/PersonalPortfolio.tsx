@@ -804,7 +804,7 @@ export default function PersonalPortfolio() {
               {/* Social Links */}
               <div className="flex items-center justify-center gap-8">
                 <motion.a
-                  href="https://github.com/timmyCoder"
+                  href="https://github.com/timi10x"
                   className="group flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-all"
                   aria-label="GitHub"
                   initial={{ y: 10, opacity: 0 }}
@@ -830,7 +830,7 @@ export default function PersonalPortfolio() {
                 </motion.span>
                 
                 <motion.a
-                  href="https://linkedin.com/in/timilehin-olatoye"
+                  href="https://linkedin.com/in/timi-o"
                   className="group flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-all"
                   aria-label="LinkedIn"
                   initial={{ y: 10, opacity: 0 }}
@@ -856,7 +856,7 @@ export default function PersonalPortfolio() {
                 </motion.span>
                 
                 <motion.a
-                  href="https://twitter.com/timmyCoder"
+                  href="https://twitter.com/timi10x"
                   className="group flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-all"
                   aria-label="Twitter"
                   initial={{ y: 10, opacity: 0 }}
