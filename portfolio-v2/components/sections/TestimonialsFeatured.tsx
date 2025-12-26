@@ -8,6 +8,13 @@ export default function TestimonialsFeatured() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
+  
+  // Reset currentIndex if it's out of bounds
+  useEffect(() => {
+    if (currentIndex >= testimonials.length && testimonials.length > 0) {
+      setCurrentIndex(0)
+    }
+  }, [currentIndex])
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -37,7 +44,18 @@ export default function TestimonialsFeatured() {
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
 
-  const currentTestimonial = testimonials[currentIndex]
+  // Ensure we have testimonials and valid index
+  if (!testimonials || testimonials.length === 0) {
+    return null
+  }
+
+  const safeIndex = Math.min(currentIndex, testimonials.length - 1)
+  const currentTestimonial = testimonials[safeIndex]
+
+  // Safety check
+  if (!currentTestimonial) {
+    return null
+  }
 
   return (
     <section className="py-10 sm:py-12 md:py-16 px-6 sm:px-8 md:px-12 lg:px-4 bg-gray-50">
