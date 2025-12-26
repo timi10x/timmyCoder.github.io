@@ -1,0 +1,16 @@
+# ====================================
+# TEST .htaccess - Absolute Minimum
+# If this doesn't work, there's a server issue
+# ====================================
+
+# Just set the index file
+DirectoryIndex index.html
+
+# Prevent directory listing
+Options -Indexes
+
+# That's it! If this doesn't work, the issue is:
+# 1. Files not uploaded correctly
+# 2. Wrong directory
+# 3. Server configuration problem
+# 4. Domain not pointing to correct location

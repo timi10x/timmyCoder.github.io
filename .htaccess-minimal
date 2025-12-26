@@ -1,0 +1,34 @@
+# ====================================
+# MINIMAL .htaccess for Next.js Static Site
+# Use this if the full version causes errors
+# ====================================
+
+# Set default index file
+DirectoryIndex index.html
+
+# Prevent directory browsing
+Options -Indexes
+
+# Handle Next.js client-side routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Only redirect to index.html if file/folder doesn't exist
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /index.html [L]
+</IfModule>
+
+# Basic MIME types for Next.js files
+<IfModule mod_mime.c>
+  AddType text/css css
+  AddType application/javascript js
+  AddType application/json json
+  AddType image/webp webp
+</IfModule>
+
+# UTF-8 Encoding
+AddDefaultCharset UTF-8
+
+# 404 Error Page
+ErrorDocument 404 /404.html
