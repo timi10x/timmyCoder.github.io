@@ -14,7 +14,7 @@ export const testimonials: Testimonial[] = [
     author: 'Idorenyin Obong',
     role: 'CEO',
     company: 'Grey',
-    linkedIn: 'https://www.linkedin.com/in/idorenyin-obong/'
+    linkedIn: 'https://www.linkedin.com/in/kingidee/'
   },
   {
     id: '2',
@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
     author: 'Kolakanmi Apanisile',
     role: 'Senior Software Engineer',
     company: 'Grey',
-    linkedIn: 'https://www.linkedin.com/in/kolakanmi-apanisile/'
+    linkedIn: 'https://www.linkedin.com/in/kola-kanmi/'
   },
   {
     id: '3',
@@ -30,7 +30,7 @@ export const testimonials: Testimonial[] = [
     author: 'James Waller',
     role: 'Android Platform Tech Lead',
     company: 'Footlocker',
-    linkedIn: 'https://www.linkedin.com/in/james-waller/'
+    linkedIn: 'https://www.linkedin.com/in/jrwaller/'
   },
   {
     id: '4',
@@ -38,22 +38,6 @@ export const testimonials: Testimonial[] = [
     author: 'Jigisha Shah',
     role: 'Software Quality Assurance',
     company: 'Footlocker',
-    linkedIn: 'https://www.linkedin.com/in/jigisha-shah/'
-  },
-  {
-    id: '5',
-    quote: "Timilehin is not just a skilled engineer; he is also an excellent team player. He communicates effectively, collaborates seamlessly with colleagues, and is always willing to share knowledge and expertise. I highly recommend Timilehin to any team or organization seeking an experienced mobile developer.",
-    author: 'Kolakanmi Apanisile',
-    role: 'Senior Software Engineer',
-    company: 'Grey',
-    linkedIn: 'https://www.linkedin.com/in/kolakanmi-apanisile/'
-  },
-  {
-    id: '6',
-    quote: "Timilehin works independently and is effective at unblocking himself. He approaches problems thoughtfully and reaches out when collaboration is necessary. He is reliable in navigating technical challenges and does not require constant oversight. Working with Timilehin has been straightforward and dependable.",
-    author: 'James Waller',
-    role: 'Android Platform Tech Lead',
-    company: 'Footlocker',
-    linkedIn: 'https://www.linkedin.com/in/james-waller/'
+    linkedIn: 'https://www.linkedin.com/in/jigisha-shah-/'
   }
 ]
