@@ -92,14 +92,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
                 {project.name}
               </h3>
-              <div className="flex items-center gap-4 mb-6 md:mb-8">
+              <div className="mb-6 md:mb-8">
                 <p className="text-lg sm:text-xl text-gray-600">{project.role}</p>
-                {project.period && (
-                  <>
-                    <span className="text-gray-300">•</span>
-                    <p className="text-sm sm:text-base text-gray-500">{project.period}</p>
-                  </>
-                )}
               </div>
               
               {/* Project Details */}
