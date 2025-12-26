@@ -1,16 +1,58 @@
+# timi10x.com Portfolio
 
-### License
-Copyright 2017 Pranesh Ravi
+My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## 🌐 Live Site
+[https://timi10x.com](https://timi10x.com)
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+## 🚀 Tech Stack
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Hosting:** GitHub Pages with custom domain
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## 📁 Structure
+```
+.
+├── portfolio-v2/        # Main Next.js application
+│   ├── app/            # App router pages
+│   ├── components/     # React components
+│   ├── data/          # Portfolio data (projects, skills, etc.)
+│   ├── public/        # Static assets
+│   └── ...
+├── CNAME              # Custom domain configuration
+└── README.md          # This file
+```
 
-This site was built from forks in the various repositories:
+## 🛠️ Development
 
-[https://github.com/praneshr/praneshr.github.io](https://github.com/praneshr/praneshr.github.io)
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
 
+### Setup
+```bash
+# Navigate to the portfolio directory
+cd portfolio-v2
 
-[https://github.com/othreecodes/othreecodes.github.io](https://github.com/othreecodes/othreecodes.github.io)
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+## 📦 Deployment
+The site is automatically deployed to GitHub Pages when changes are pushed to the main branch.
+
+## 🔗 Connect
+- **GitHub:** [@timi10x](https://github.com/timi10x)
+- **LinkedIn:** [@timi-o](https://www.linkedin.com/in/timi-o/)
+- **Medium:** [@timmy10x](https://medium.com/@timmy10x)
+- **Twitter:** [@timi10x](https://twitter.com/timi10x)
+
+## 📄 License
+© 2024 Timilehin Olatoye. All rights reserved.
