@@ -53,7 +53,17 @@ export const projects: Project[] = [
         'Increased test coverage by 10% and wrote comprehensive unit tests'
       ],
       technologies: ['Kotlin', 'KMM', 'Ktor', 'Server-Driven UI', 'Python', 'Go', 'Jetpack Compose']
-    }
+    },
+    appImages: [
+      '/img/AppImages/GreyAppImage/grey1.webp',
+      '/img/AppImages/GreyAppImage/grey2.webp',
+      '/img/AppImages/GreyAppImage/grey3.webp',
+      '/img/AppImages/GreyAppImage/grey4.webp',
+      '/img/AppImages/GreyAppImage/grey5.webp',
+      '/img/AppImages/GreyAppImage/grey6.webp',
+      '/img/AppImages/GreyAppImage/grey7.webp',
+      '/img/AppImages/GreyAppImage/grey8.webp'
+    ]
   },
   {
     id: 'fidelity',
@@ -73,7 +83,11 @@ export const projects: Project[] = [
         'Achieved feature parity between Android and iOS platforms using Kotlin Multiplatform Mobile'
       ],
       technologies: ['Kotlin', 'KMM', 'Gradle', 'Maestro', 'Predictive Analytics', 'Unit Testing']
-    }
+    },
+    appImages: [
+      '/img/AppImages/FidelityBloomAppImage/FDBloom1.png',
+      '/img/AppImages/FidelityBloomAppImage/FDBloom2.png'
+    ]
   },
   {
     id: 'pastel',
@@ -93,7 +107,14 @@ export const projects: Project[] = [
         'Added analytics to track events and improve data collection by 30%'
       ],
       technologies: ['Android', 'Kotlin', 'Custom Views', 'Analytics', 'Team Leadership']
-    }
+    },
+    appImages: [
+      '/img/AppImages/PastelAfricaImages/sabi1.webp',
+      '/img/AppImages/PastelAfricaImages/sabi2.webp',
+      '/img/AppImages/PastelAfricaImages/sabi3.webp',
+      '/img/AppImages/PastelAfricaImages/sabi4.webp',
+      '/img/AppImages/PastelAfricaImages/sabi5.webp'
+    ]
   },
   {
     id: 'chaka',
@@ -113,7 +134,15 @@ export const projects: Project[] = [
         'Released apps to Play Store as release manager'
       ],
       technologies: ['Kotlin', 'Custom Views', 'Play Store', 'Analytics', 'Performance Optimization']
-    }
+    },
+    appImages: [
+      '/img/AppImages/ChakaAppImages/Chaka1.webp',
+      '/img/AppImages/ChakaAppImages/Chaka2.webp',
+      '/img/AppImages/ChakaAppImages/Chaka3.webp',
+      '/img/AppImages/ChakaAppImages/Chaka4.webp',
+      '/img/AppImages/ChakaAppImages/Chaka5.webp',
+      '/img/AppImages/ChakaAppImages/Chaka6.webp'
+    ]
   },
   {
     id: 'crop2cash',
@@ -133,6 +162,12 @@ export const projects: Project[] = [
         'Contributed to backend team building and deploying microservices with Python'
       ],
       technologies: ['Android', 'Kotlin', 'Java', 'Python', 'Microservices', 'Architecture']
-    }
+    },
+    appImages: [
+      '/img/AppImages/C2CImages/c2c1.webp',
+      '/img/AppImages/C2CImages/c2c2.webp',
+      '/img/AppImages/C2CImages/c2c3.webp',
+      '/img/AppImages/C2CImages/c2c4.webp'
+    ]
   }
 ]
