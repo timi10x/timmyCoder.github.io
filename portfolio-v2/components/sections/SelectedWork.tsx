@@ -14,7 +14,7 @@ export default function SelectedWork({ onProjectSelect }: SelectedWorkProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
   return (
-    <section id="work" className="py-12 sm:py-16 md:py-20 px-4">
+    <section id="work" className="py-8 sm:py-16 md:py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 text-gray-900"

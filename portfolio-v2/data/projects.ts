@@ -7,10 +7,14 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Leading Android technical development for 3 major retail apps.',
     impact: '83% faster builds',
+    impactContext: 'Reduced PR build check time from ~12min to ~2min',
     image: '👟',
     color: 'from-slate-600 to-slate-800',
     tags: ['Android', 'CI/CD', 'Kotlin'],
     period: 'Jun 2025 – Present',
+    featured: true,
+    externalUrl: 'https://play.google.com/store/apps/details?id=com.footlocker.approved&hl=en_US',
+    externalUrlLabel: 'View on Play Store',
     details: {
       responsibilities: [
         'Serving as Android technical lead for redesign and rewrite of Foot Locker, Champs Sports, and Kids Foot Locker mobile applications',
@@ -37,10 +41,14 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Scaled fintech platform to 2M+ users globally.',
     impact: '2M+ users',
+    impactContext: 'Scaled platform to 2M+ active users across 40+ countries',
     image: '💳',
     color: 'from-blue-600 to-indigo-700',
     tags: ['KMM', 'Python', 'Go'],
     period: 'Jun 2024–Jun 2025 & Mar 2022–Dec 2023',
+    featured: true,
+    externalUrl: 'https://play.google.com/store/apps/details?id=co.grey.mobile.android&hl=en_US',
+    externalUrlLabel: 'View on Play Store',
     details: {
       responsibilities: [
         'Solved scaling issues and brought structure to the team',
@@ -71,10 +79,13 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Built KMM modules for iOS/Android parity. Raised test coverage by 67.8% using Maestro.',
     impact: '67.8% test coverage',
+    impactContext: 'Raised test coverage from near-zero to 67.8% with Maestro automation',
     image: '🏦',
     color: 'from-green-600 to-emerald-700',
     tags: ['KMM', 'Testing', 'Gradle'],
     period: 'Feb 2023 – Apr 2024',
+    externalUrl: 'https://play.google.com/store/apps/details?id=com.fidelity.android&hl=en_US',
+    externalUrlLabel: 'View on Play Store',
     details: {
       responsibilities: [
         'Wrote custom Gradle tasks to publish feature modules as Gradle libraries, utilized by 20+ engineers',
@@ -100,10 +111,13 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Built reusable UI component system. Grew engineering team 50% and improved analytics by 30%.',
     impact: '30% analytics boost',
+    impactContext: 'Increased analytics accuracy by 30% through comprehensive event tracking',
     image: '🎨',
     color: 'from-purple-600 to-pink-600',
     tags: ['Android', 'Team Lead', 'Analytics'],
     period: 'May 2022 – Nov 2022',
+    externalUrl: 'https://www.pastelhq.ai/',
+    externalUrlLabel: 'View Pastel Africa',
     details: {
       responsibilities: [
         'Built and rolled out reusable custom UI components used internally by 4 engineers',
@@ -127,10 +141,13 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Achieved 95% crash-free sessions for investment app. Increased user retention by 30%.',
     impact: '30% retention boost',
+    impactContext: 'Improved user retention by 30% through 95% crash-free sessions',
     image: '📈',
     color: 'from-orange-600 to-red-600',
     tags: ['Kotlin', 'Custom Views', 'Performance'],
     period: 'Mar 2021 – Mar 2022',
+    externalUrl: 'https://play.google.com/store/apps/details?id=ng.chaka.android&hl=en&gl=US',
+    externalUrlLabel: 'View on Play Store',
     details: {
       responsibilities: [
         'Handled maintenance and shipping of new features for Chaka investment app',
@@ -155,10 +172,13 @@ export const projects: Project[] = [
     role: 'Software Engineer',
     description: 'Automated supply chain saving 35% costs. Reduced crashes by 50% through Kotlin migration.',
     impact: '35% cost reduction',
+    impactContext: 'Automated supply chain processing, saving 35% of manual costs',
     image: '🌾',
     color: 'from-green-600 to-lime-600',
     tags: ['Kotlin', 'Python', 'Automation'],
     period: 'Oct 2018 – Feb 2021',
+    externalUrl: 'https://play.google.com/store/apps/developer?id=Crop2Cash&hl=en',
+    externalUrlLabel: 'View on Play Store',
     details: {
       responsibilities: [
         'Automated supply chain process of agro-processors saving 35% of manual processing costs',

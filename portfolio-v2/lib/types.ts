@@ -6,15 +6,19 @@ export interface Project {
   role: string
   description: string
   impact: string
+  impactContext?: string
   image: string
   color: string
   tags: string[]
   period?: string
+  externalUrl?: string
+  externalUrlLabel?: string
+  featured?: boolean
   details?: {
     responsibilities: string[]
     technologies: string[]
   }
-  appImages?: string[]  // Array of app screenshot paths
+  appImages?: string[]
 }
 
 export interface Skill {
@@ -43,4 +47,13 @@ export interface SocialLink {
   name: string
   url: string
   icon?: React.ReactNode
+}
+
+export interface BlogPostMeta {
+  slug: string
+  title: string
+  description: string
+  date: string
+  readingTime: string
+  tags: string[]
 }
