@@ -145,9 +145,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </h3>
               <div className="mb-4 md:mb-6">
                 <p className="text-lg sm:text-xl text-gray-600">{project.role}</p>
-                {project.period && (
-                  <p className="text-sm text-gray-400 mt-1">{project.period}</p>
-                )}
               </div>
 
               {/* Project Details */}

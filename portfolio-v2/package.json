@@ -12,17 +12,10 @@
   "author": "Daniel Olatoye",
   "license": "ISC",
   "dependencies": {
-    "@react-three/drei": "^10.7.6",
-    "@react-three/fiber": "^9.4.0",
-    "@studio-freight/lenis": "^1.0.42",
-    "@types/three": "^0.180.0",
     "framer-motion": "^12.23.24",
-    "gsap": "^3.13.0",
     "next": "^15.5.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-spring": "^10.0.3",
-    "three": "^0.180.0"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.6.2",

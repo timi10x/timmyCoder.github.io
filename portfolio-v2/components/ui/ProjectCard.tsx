@@ -63,12 +63,7 @@ export default function ProjectCard({
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0">
                     {project.name}
                   </h3>
-                  <div className="flex items-center gap-3 mt-1">
-                    <p className="text-gray-600 text-sm sm:text-base">{project.role}</p>
-                    {project.period && (
-                      <span className="text-xs text-gray-400 hidden sm:inline">{project.period}</span>
-                    )}
-                  </div>
+                  <p className="text-gray-600 text-sm sm:text-base mt-1">{project.role}</p>
                   <p className="text-gray-500 text-xs sm:text-sm md:text-base max-w-xl mt-1 md:mt-2">
                     {project.description}
                   </p>
